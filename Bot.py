@@ -2,8 +2,6 @@ import discord
 from discord.ext.commands import Bot
 from discord.ext import *
 import os
-import cleverbotfree.cbfree
-import sys
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -31,12 +29,5 @@ async def commands(ctx):
 !help - Bot help.
 
 !commands - Request for list of all commands.```""")
-  
-@client.command(pass_context=True)
-async def chat(ctx, *, TexT):
-  responze = cb.single_exchange(TexT)
-  await ctx.send(responze)
-  cb.browser.close()
-  sys.exit()
   
 client.run(os.environ['BOT_TOKEN'])
