@@ -7,8 +7,6 @@ Client = discord.Client()
 bot_prefix= "!"
 client = commands.Bot(command_prefix=bot_prefix)
 
-cb = cleverbotfree.cbfree.Cleverbot()
-
 client.remove_command('help')
 
 @client.event
