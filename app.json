@@ -3,3 +3,5 @@
       "url": "https://github.com/heroku/heroku-buildpack-python.git#remove- 
               sqlite"
     },
+    
+"env": ["PYTHON_NO_SQLITE3": {"value": "true"}]
