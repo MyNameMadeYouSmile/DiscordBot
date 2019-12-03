@@ -11,6 +11,12 @@ Client = discord.Client()
 bot_prefix= "!"
 client = commands.Bot(command_prefix=bot_prefix)
 
+reddit = praw.Reddit(client_id=os.environ['14_chars'], \
+                     client_secret=os.environ['27_chars'], \
+                     user_agent='Tester', \
+                     username=os.environ['reddit_u'], \
+                     password=os.environ['reddit_p'])
+
 client.remove_command('help')
 
 @client.event
