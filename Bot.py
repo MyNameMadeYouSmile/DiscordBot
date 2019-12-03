@@ -5,6 +5,7 @@ import os
 from googletrans import Translator
 import urllib.request
 import json
+import praw
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -64,6 +65,16 @@ async def urban(ctx, *, term):
     await ctx.send('There\'s no definition for this word.')
   except urllib.error.URLError:
     pass
+  
+@client.command(pass_context=True)
+async def hotpost(ctx, *, subreddit):
+  if ";" in subreddit:
+    subreddit = subreddit.replace(";", "+")
+    for submission in reddit.subreddit(subreddit).hot(limit=25):
+      print(submission.title)
+  else:
+    for submission in reddit.subreddit(subreddit).hot(limit=25):
+      print(submission.title)
     
 @translate.error
 async def translate_error(error, ctx):
