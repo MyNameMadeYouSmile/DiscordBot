@@ -3,6 +3,8 @@ from discord.ext.commands import Bot
 from discord.ext import *
 import os
 from googletrans import Translator
+import urllib.request
+import json
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -27,7 +29,11 @@ async def commands(ctx):
 . :: COMMANDS LIST :: .
 !help - Bot help.
 
-!commands - Request for list of all commands.```""")
+!commands - Request for list of all commands.
+
+!translate - Translate a word or sentence from one language to another.
+
+!urban - Request a definition for a term from urban dictionary.```""")
   
 @client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
@@ -45,8 +51,26 @@ Japanese - ja | Spanish - es | French - fr
 Swedish - sv  | Chech - cz   | Portuguese - pt```""")
     await ctx.send("More codes here: https://ctrlq.org/code/19899-google-translate-languages")
     
+@client.command(pass_context=True)
+async def urban(ctx, *, term):
+  try:
+    url = 'http://api.urbandictionary.com/v0/define?term=%s' % (term)
+    res = urllib.request.urlopen(url) 
+    data = json.loads(res.read().decode('utf-8'))
+    definition = data['list'][0]['definition']
+    await ctx.send(definition)
+  except IndexError:
+    print("index error")
+    await ctx.send('There\'s no definition for this word.')
+  except urllib.error.URLError:
+    pass
+    
 @translate.error
 async def translate_error(error, ctx):
     return await error.send(error.message.author.mention + " Usage: !translate [from lang code] [to lang code] [sentence]")
+ 
+@translate.error
+async def urban_error(error, ctx):
+    return await error.send(error.message.author.mention + " Usage: !urban [term]")
   
 client.run(os.environ['BOT_TOKEN'])
