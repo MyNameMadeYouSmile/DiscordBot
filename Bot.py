@@ -37,11 +37,12 @@ async def translate(ctx, From, To, *, sentence):
     await ctx.send(translation.text)
   except ValueError:
     await ctx.send("""```diff
-    Language Codes
-    English - en  | Russian - ru | German - de
-    Dutch - nl    | Italian - it | Polish - pl  
-    Japanese - ja | Spanish - es | French - fr
-    Swedish - sv  | Chech - cz   | Portuguese - pt```""")
+Language Codes
+
+English - en  | Russian - ru | German - de
+Dutch - nl    | Italian - it | Polish - pl  
+Japanese - ja | Spanish - es | French - fr
+Swedish - sv  | Chech - cz   | Portuguese - pt```""")
     await ctx.send("More codes here: https://ctrlq.org/code/19899-google-translate-languages")
     
 @translate.error
