@@ -77,10 +77,10 @@ async def hotpost(ctx, *, subreddit):
   if ";" in subreddit:
     subreddit = subreddit.replace(";", "+")
     for submission in reddit.subreddit(subreddit).hot(limit=3):
-      await ctx.send(submission.title)
+      await ctx.send(submission.title + "\n")
   else:
     for submission in reddit.subreddit(subreddit).hot(limit=3):
-      await ctx.send(submission.title)
+      await ctx.send(submission.title + "\n")
     
 @translate.error
 async def translate_error(error, ctx):
