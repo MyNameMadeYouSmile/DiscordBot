@@ -42,7 +42,6 @@ async def translate(ctx, From, To, *, sentence):
     Dutch - nl    | Italian - it | Polish - pl  
     Japanese - ja | Spanish - es | French - fr
     Swedish - sv  | Chech - cz   | Portuguese - pt```""")
-    ")
     await ctx.send("More codes here: https://ctrlq.org/code/19899-google-translate-languages")
     
 @translate.error
