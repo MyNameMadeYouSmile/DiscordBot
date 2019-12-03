@@ -2,6 +2,7 @@ import discord
 from discord.ext.commands import Bot
 from discord.ext import *
 import os
+from googletrans import Translator
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -27,5 +28,25 @@ async def commands(ctx):
 !help - Bot help.
 
 !commands - Request for list of all commands.```""")
+  
+@client.command(pass_context=True)
+async def translate(ctx, From, To, *, sentence):
+  translator = Translator()
+  try:
+    translation = translator.translate(sentence, dest=To, src=From)
+    await ctx.send(translation.text)
+  except ValueError:
+    await ctx.send("""```diff
+    Language Codes
+    English - en  | Russian - ru | German - de
+    Dutch - nl    | Italian - it | Polish - pl  
+    Japanese - ja | Spanish - es | French - fr
+    Swedish - sv  | Chech - cz   | Portuguese - pt```""")
+    ")
+    await ctx.send("More codes here: https://ctrlq.org/code/19899-google-translate-languages")
+    
+@translate.error
+async def translate_error(error, ctx):
+    return await error.send(error.message.author.mention + " Usage: !translate [from lang code] [to lang code] [sentence]")
   
 client.run(os.environ['BOT_TOKEN'])
