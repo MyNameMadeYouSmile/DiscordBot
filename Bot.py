@@ -73,16 +73,9 @@ async def urban(ctx, *, term):
     pass
   
 @client.command(pass_context=True)
-async def hotpost(ctx, *, subreddit):
-  if ";" in subreddit:
-    subreddit = subreddit.replace(";", "+")
-    for submission in reddit.subreddit(subreddit).hot(limit=3):
-      if not submission.stickied:
-        await ctx.send("""```""" + submission.title + """```""")
-  else:
-    for submission in reddit.subreddit(subreddit).hot(limit=3):
-      if not submission.stickied:
-        await ctx.send("""```""" + submission.title + """```""")
+async def newgwa(ctx):
+  for submission in reddit.subreddit("gonewildaudio+gonewildaudible+gwascriptguild+gwabackstage").new(limit=1):
+    await ctx.send("""```""" + submission.title + """```""")
     
 @translate.error
 async def translate_error(error, ctx):
