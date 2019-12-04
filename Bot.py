@@ -40,7 +40,9 @@ async def commands(ctx):
 
 !translate - Translate a word or sentence from one language to another.
 
-!urban - Request a definition for a term from urban dictionary.```""")
+!urban - Request a definition for a term from urban dictionary.
+
+!gwanew - Get most the newest posts from 4 GWA related subreddits.```""")
   
 @client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
