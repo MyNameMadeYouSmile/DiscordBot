@@ -32,7 +32,7 @@ async def help(ctx):
   
 @client.command(pass_context=True)
 async def commands(ctx):
-  await ctx.send("""```diff
+  await ctx.send("""```
           **COMMANDS LIST**
           
 !help - Bot help.
