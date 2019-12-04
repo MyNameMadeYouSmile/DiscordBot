@@ -111,26 +111,20 @@ async def search(ctx, *, query):
   titles = []
   descriptions = []
   for r in result_div:
-    # Checks if each element is present, else, raise exception
-    try:
-      link = r.find('a', href = True)
-      titleone = r.find('div', attrs={'class':'vvjwJb'}).get_text()
-      description = r.find('div', attrs={'class':'s3v9rd'}).get_text()
+    link = r.find('a', href = True)
+    titleone = r.find('div', attrs={'class':'vvjwJb'}).get_text()
+    description = r.find('div', attrs={'class':'s3v9rd'}).get_text()
         
-      # Check to make sure everything is present before appending
-      if link != '' and titleone != '' and description != '': 
-        links.append(link['href'])
-        titles.append(titleone)
-        descriptions.append(description)
+    if link != '' and titleone != '' and description != '': 
+      links.append(link['href'])
+      titles.append(titleone)
+      descriptions.append(description)
         
-        embed=discord.Embed(title=titles[0], url=links[0], description=descriptions[0], color=0x5b5bff)
-        embed.add_field(name="[" + titles[1] + "](" + links[1] + ")", value=description[1], inline=False)
-        embed.add_field(name="[" + titles[2] + "](" + links[2] + ")", value=description[2], inline=False)
-        embed.add_field(name="[" + titles[3] + "](" + links[3] + ")", value=description[3], inline=False)
-        await ctx.send(embed=embed)
-    # Next loop if one element is not present
-    except:
-      print(Exception)
+      embed=discord.Embed(title=titles[0], url=links[0], description=descriptions[0], color=0x5b5bff)
+      embed.add_field(name="[" + titles[1] + "](" + links[1] + ")", value=description[1], inline=False)
+      embed.add_field(name="[" + titles[2] + "](" + links[2] + ")", value=description[2], inline=False)
+      embed.add_field(name="[" + titles[3] + "](" + links[3] + ")", value=description[3], inline=False)
+      await ctx.send(embed=embed)
     
 @translate.error
 async def translate_error(error, ctx):
