@@ -33,7 +33,8 @@ async def help(ctx):
 @client.command(pass_context=True)
 async def commands(ctx):
   await ctx.send("""```diff
-. :: COMMANDS LIST :: .
+          **COMMANDS LIST**
+          
 !help - Bot help.
 
 !commands - Request for list of all commands.
@@ -42,7 +43,7 @@ async def commands(ctx):
 
 !urban - Request a definition for a term from urban dictionary.
 
-!gwanew - Get most the newest posts from 4 GWA related subreddits.```""")
+!gwanew - Get the newest posts from 4 GWA related subreddits.```""")
   
 @client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
