@@ -1,2 +1,2 @@
-# DiscordGWABot
+# Discord Bot
 A discord bot
