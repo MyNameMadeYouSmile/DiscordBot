@@ -74,24 +74,26 @@ async def urban(ctx, *, term):
   
 @client.command(pass_context=True)
 async def newgwa(ctx):
-  for submission1 in reddit.subreddit('gonewildaudio').new(limit=1):
-    await ctx.send("""```Gone Wild Audio
+  for submission in reddit.subreddit('gonewildaudio+gonewildaudible+gwascriptguild+gwabackstage').new(limit=1):
+    await.ctx.send("""```""" + submission.title + """```""")
+  #for submission1 in reddit.subreddit('gonewildaudio').new(limit=1):
+   # await ctx.send("""```Gone Wild Audio
   
-    """ + submission1.title + """```""")
-  for submission2 in reddit.subreddit('gonewildaudle').new(limit=1):
-    await ctx.send("""```Gone Wild Audible
+    #""" + submission1.title + """```""")
+  #for submission2 in reddit.subreddit('gonewildaudible').new(limit=1):
+   # await ctx.send("""```Gone Wild Audible
   
-    """ + submission2.title + """```""")
+    #""" + submission2.title + """```""")
     
-  for submission3 in reddit.subreddit('gwascriptguild').new(limit=1):
-    await ctx.send("""```GWA Script Guild
+  #for submission3 in reddit.subreddit('gwascriptguild').new(limit=1):
+   # await ctx.send("""```GWA Script Guild
   
-    """ + submission3.title + """```""")
+    #""" + submission3.title + """```""")
     
-  for submission4 in reddit.subreddit('gwabackstage').new(limit=1):
-    await ctx.send("""```GWA Backstage
+  #for submission4 in reddit.subreddit('gwabackstage').new(limit=1):
+   # await ctx.send("""```GWA Backstage
   
-    """ + submission4.title + """```""")
+    #""" + submission4.title + """```""")
     
 @translate.error
 async def translate_error(error, ctx):
