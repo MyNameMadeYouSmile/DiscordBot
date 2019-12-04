@@ -74,18 +74,23 @@ async def urban(ctx, *, term):
   
 @client.command(pass_context=True)
 async def newgwa(ctx):
+  submission1 = reddit.subreddit('gonewildaudio').new(limit=1)
+  submission2 = reddit.subreddit('gonewildaudle').new(limit=1)
+  submission3 = reddit.subreddit('gwascriptguild').new(limit=1)
+  submission4 = reddit.subreddit('gwabackstage').new(limit=1)
+  
   await ctx.send("""```Gone Wild Audio
   
-  """ + reddit.subreddit('gonewildaudio').new(limit=1).title + """```""")
+  """ + submission1.title + """```""")
   await ctx.send("""```Gone Wild Audible
   
-  """ + reddit.subreddit('gonewildaudible').new(limit=1).title + """```""")
+  """ + submission2.title + """```""")
   await ctx.send("""```GWA Script Guild
   
-  """ + reddit.subreddit('gwascriptguild').new(limit=1).title + """```""")
+  """ + submission3.title + """```""")
   await ctx.send("""```GWA Backstage
   
-  """ + reddit.subreddit('gwabackstage').new(limit=1).title + """```""")
+  """ + submission4.title + """```""")
     
 @translate.error
 async def translate_error(error, ctx):
