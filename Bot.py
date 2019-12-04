@@ -75,7 +75,7 @@ async def urban(ctx, *, term):
 @client.command(pass_context=True)
 async def newgwa(ctx):
   for submission in reddit.subreddit('gonewildaudio+gonewildaudible+gwascriptguild+gwabackstage').new(limit=1):
-    await.ctx.send("""```""" + submission.title + """```""")
+    await ctx.send("""```""" + submission.title + """```""")
   #for submission1 in reddit.subreddit('gonewildaudio').new(limit=1):
    # await ctx.send("""```Gone Wild Audio
   
