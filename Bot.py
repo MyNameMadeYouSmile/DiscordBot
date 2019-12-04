@@ -76,10 +76,10 @@ async def urban(ctx, *, term):
 async def hotpost(ctx, *, subreddit):
   if ";" in subreddit:
     subreddit = subreddit.replace(";", "+")
-    for submission in reddit.subreddit(subreddit).hot(limit=3):
+    for submission in reddit.subreddit(subreddit).hot(limit=3) if not submission.stickied:
       await ctx.send("""```""" + submission.title + """```""")
   else:
-    for submission in reddit.subreddit(subreddit).hot(limit=3):
+    for submission in reddit.subreddit(subreddit).hot(limit=3) if not submission.stickied:
       await ctx.send("""```""" + submission.title + """```""")
     
 @translate.error
