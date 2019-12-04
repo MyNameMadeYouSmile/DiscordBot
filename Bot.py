@@ -130,7 +130,7 @@ async def search(ctx, *, query):
         await ctx.send(embed=embed)
     # Next loop if one element is not present
     except:
-      continue
+      print(Exception)
     
 @translate.error
 async def translate_error(error, ctx):
