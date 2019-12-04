@@ -6,6 +6,9 @@ from googletrans import Translator
 import urllib.request
 import json
 import praw
+import requests
+from fake_useragent import UserAgent
+from bs4 import BeautifulSoup
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -95,6 +98,10 @@ async def newgwa(ctx):
     await ctx.send("""```GWA Backstage
   
     """ + submission4.title + """```""")
+    
+@client.command(pass_context=True)
+async def search(ctx, *, query):
+  
     
 @translate.error
 async def translate_error(error, ctx):
