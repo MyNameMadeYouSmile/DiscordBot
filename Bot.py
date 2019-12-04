@@ -7,7 +7,6 @@ import urllib.request
 import json
 import praw
 import requests
-from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
 
 Client = discord.Client()
@@ -101,10 +100,9 @@ async def newgwa(ctx):
     
 @client.command(pass_context=True)
 async def search(ctx, *, query):
-  ua = UserAgent()
 
   google_url = "https://www.google.com/search?q=site:soundgasm.net+" + query + "&num=5"
-  response = requests.get(google_url, {"User-Agent": ua.random})
+  response = requests.get(google_url)
   soup = BeautifulSoup(response.text, "html.parser")
 
   result_div = soup.find_all('div', attrs = {'class': 'ZINbbc'})
