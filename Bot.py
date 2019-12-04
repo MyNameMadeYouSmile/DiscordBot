@@ -74,7 +74,7 @@ async def urban(ctx, *, term):
   
 @client.command(pass_context=True)
 async def newgwa(ctx):
-  for submission in reddit.subreddit('gonewildaudio', 'gonewildaudible', 'gwascriptguild', 'gwabackstage').new(limit=1):
+  for submission in reddit.subreddit('gonewildaudio+gonewildaudible+gwascriptguild+gwabackstage').new(limit=4):
     await ctx.send("""```""" + submission.title + """```""")
     
 @translate.error
