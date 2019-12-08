@@ -8,13 +8,10 @@ import json
 import praw
 import requests
 from bs4 import BeautifulSoup
-from cleverbotfree.cbfree import Cleverbot
 
 Client = discord.Client()
 bot_prefix= "!"
 client = commands.Bot(command_prefix=bot_prefix)
-
-sendCb = Cleverbot().single_exchange
 
 reddit = praw.Reddit(client_id=os.environ['14_chars'], \
                      client_secret=os.environ['27_chars'], \
@@ -100,16 +97,6 @@ async def newgwa(ctx):
     await ctx.send("""```GWA Backstage
   
     """ + submission4.title + """```""")
-  
-@client.command(pass_context=True)    
-async def chat(ctx, *, args):
-  userInput = ' '.join(args)
-  try:
-    response = sendCb(userInput)
-    await ctx.send(response)
-  except:
-    embed = discord.Embed(title='ERROR: Could not connect. Please try again', color=0xff0000)
-    await ctx.send(embed=embed)
     
 @client.command(pass_context=True)
 async def search(ctx, *, query):
