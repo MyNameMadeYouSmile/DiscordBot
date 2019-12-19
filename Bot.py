@@ -96,7 +96,7 @@ async def searchgwa(ctx, *, searchterm):
   for searchgwa in reddit.subreddit('gonewildaudio').search(searchterm, limit=5):
     if searchgwa.title.length > 256:
       searchgwa.title = searchgwa.title[:253] + '...'
-    embed=discord.Embed(title=searchgwa.title, url=searchgwa.url, description=searchgwa.selftext color=0x5b5bff)
+    embed=discord.Embed(title=searchgwa.title, url=searchgwa.url, description=searchgwa.selftext, color=0x5b5bff)
     embed.set_author(name=searchgwa.author)
     embed.set_thumbnail(url="https://www.redditstatic.com/desktop2x/img/avatar_over18.png")
     await ctx.send(embed=embed)
