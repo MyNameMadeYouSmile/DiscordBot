@@ -49,15 +49,6 @@ async def commands(ctx):
 !newgwa - Get the newest posts from 4 GWA related subreddits.```""")
   
 @client.command(pass_context=True)
-async def scripts(ctx):
-  embed=discord.Embed(title="Scripts Archive #1", url=os.environ['first_scripts'], description="Archive of MyNameMadeYouSmile's scripts #1", color=random.randint(0, 0xffffff))
-  embed.set_author(name=ctx.message.author)
-  embed1=discord.Embed(title="Scripts Archive #2", url=os.environ['second_scripts'], description="Archive of MyNameMadeYouSmile's scripts #2", color=random.randint(0, 0xffffff))
-  embed1.set_author(name=ctx.message.author)
-  await ctx.send(embed=embed)
-  await ctx.send(embed=embed1)
-  
-@client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
   translator = Translator()
   try:
@@ -86,6 +77,17 @@ async def urban(ctx, *, term):
     await ctx.send('There\'s no definition for this word.')
   except urllib.error.URLError:
     pass
+  
+@client.command(pass_context=True)
+async def love(ctx, pupil1, pupil2):
+  girlie = pupil1
+  n = 1
+  rnd = random.randint(1,20)
+  princie = pupil2
+  boi = (len(princie))
+  gurl = (len(girlie))
+  score = 100-(boi*gurl)-rnd
+  await ctx.send("There is a " + str(score) + "% chance that {} and {} love eachother.".format(pupil1, pupil2))
   
 @client.command(pass_context=True)
 async def newgwa(ctx):
@@ -142,6 +144,10 @@ async def translate_error(error, ctx):
  
 @translate.error
 async def urban_error(error, ctx):
-    return await error.send(error.message.author.mention + " Usage: !urban [term]")
+    return await error.send(error.message.author.mention + " Usage: !urban term")
+  
+@love.error
+async def love_error(error, ctx):
+    return await error.send(error.message.author.mention + " Usage: !love boy & girl")
   
 client.run(os.environ['BOT_TOKEN'])
