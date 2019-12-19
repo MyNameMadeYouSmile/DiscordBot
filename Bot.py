@@ -101,7 +101,7 @@ async def searchgwa(ctx, *, searchterm):
     embed.set_author(name="Result #" + str(resultnum))
     #embed.set_thumbnail(url="https://www.redditstatic.com/desktop2x/img/avatar_over18.png")
     embed.add_field(name="Post Author", value="/u/" + str(searchgwa.author), inline=True)
-    embed.add_field(name="Date", value=str(submission.created), inline=True)
+    embed.add_field(name="Date", value=str(searchgwa.created), inline=True)
     embed.add_field(name="Content Warning", value="NSFW", inline=True)
     await ctx.send(embed=embed)
     resultnum += 1
