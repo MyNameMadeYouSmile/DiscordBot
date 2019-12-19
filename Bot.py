@@ -94,10 +94,9 @@ async def love(ctx, pupil1, pupil2):
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
   for searchgwa in reddit.subreddit('gonewildaudio').search(searchterm, limit=5):
-    searchgwa.title1 = ""
     if searchgwa.title.length > 256:
-      searchgwa.title1 = searchgwa.title[:253] + '...'
-    embed=discord.Embed(title=searchgwa.title1, url=searchgwa.url, description=searchgwa.selftext color=0x5b5bff)
+      searchgwa.title = searchgwa.title[:253] + '...'
+    embed=discord.Embed(title=searchgwa.title, url=searchgwa.url, description=searchgwa.selftext color=0x5b5bff)
     embed.set_author(name=searchgwa.author)
     embed.set_thumbnail(url="https://www.redditstatic.com/desktop2x/img/avatar_over18.png")
     await ctx.send(embed=embed)
