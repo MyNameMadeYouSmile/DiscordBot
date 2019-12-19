@@ -144,10 +144,10 @@ async def translate_error(error, ctx):
  
 @translate.error
 async def urban_error(error, ctx):
-    return await error.send(error.message.author.mention + " Usage: !urban term")
+    return await error.send(error.message.author.mention + " Usage: !urban [term]")
   
 @love.error
 async def love_error(error, ctx):
-    return await error.send(error.message.author.mention + " Usage: !love boy & girl")
+    return await error.send(error.message.author.mention + " Usage: !love [boy] [girl]")
   
 client.run(os.environ['BOT_TOKEN'])
