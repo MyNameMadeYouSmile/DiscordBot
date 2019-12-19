@@ -97,7 +97,7 @@ async def searchgwa(ctx, *, searchterm):
     if len(searchgwa.title) > 256:
       searchgwa.title = searchgwa.title[:253] + '...'
     embed=discord.Embed(title=searchgwa.title, url=searchgwa.url, description=searchgwa.selftext, color=0x5b5bff)
-    embed.set_author(name=searchgwa.author)
+    embed.set_author(name="GoneWildAudio Post", url="http://reddit.com/r/gonewildaudio")
     #embed.set_thumbnail(url="https://www.redditstatic.com/desktop2x/img/avatar_over18.png")
     embed.add_field(name="Post Author", value="/u/" + str(searchgwa.author), inline=True)
     embed.add_field(name="Content Warning", value="NSFW", inline=True)
