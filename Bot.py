@@ -47,7 +47,7 @@ async def commands(ctx):
 
 !urban - Request a definition for a term from urban dictionary.
 
-!newgwa - Get the newest posts from 4 GWA related subreddits.
+!searchgwa - Search for posts in gonewildaudio (5 posts per request).
 
 !love - Calculate the possibility of two users loving eachother.```""")
   
