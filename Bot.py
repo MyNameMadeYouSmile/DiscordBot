@@ -46,7 +46,9 @@ async def commands(ctx):
 
 !urban - Request a definition for a term from urban dictionary.
 
-!newgwa - Get the newest posts from 4 GWA related subreddits.```""")
+!newgwa - Get the newest posts from 4 GWA related subreddits.
+
+!love - Calculate the possibility of two users loving eachother.```""")
   
 @client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
