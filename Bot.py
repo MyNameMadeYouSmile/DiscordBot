@@ -8,6 +8,7 @@ import json
 import praw
 import requests
 from bs4 import BeautifulSoup
+import random
 
 Client = discord.Client()
 bot_prefix= "!"
