@@ -92,6 +92,12 @@ async def love(ctx, pupil1, pupil2):
   await ctx.send("There is a " + str(score) + "% chance that {} and {} love eachother.".format(pupil1, pupil2))
   
 @client.command(pass_context=True)
+async def searchgwa(ctx, *, searchterm):
+  for searchgwa in reddit.subreddit('gonewildaudio').search(searchterm)(limit=5):
+    embed=discord.Embed(title=searchgwa.title, url=searchgwa.url, description=searchgwa.selftext, color=0x5b5bff)
+    await ctx.send(embed=embed)
+  
+@client.command(pass_context=True)
 async def newgwa(ctx):
   for submission1 in reddit.subreddit('gonewildaudio').new(limit=1):
     await ctx.send("""```Gone Wild Audio
