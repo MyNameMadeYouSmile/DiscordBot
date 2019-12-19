@@ -93,7 +93,7 @@ async def love(ctx, pupil1, pupil2):
   
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
-  for searchgwa in reddit.subreddit('gonewildaudio').search(searchterm)(limit=5):
+  for searchgwa in reddit.subreddit('gonewildaudio').search(searchterm, limit=5):
     embed=discord.Embed(title=searchgwa.title, url=searchgwa.url, description=searchgwa.selftext, color=0x5b5bff)
     await ctx.send(embed=embed)
   
