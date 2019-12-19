@@ -45,7 +45,16 @@ async def commands(ctx):
 
 !urban - Request a definition for a term from urban dictionary.
 
-!gwanew - Get the newest posts from 4 GWA related subreddits.```""")
+!newgwa - Get the newest posts from 4 GWA related subreddits.```""")
+  
+@client.command(pass_context=True)
+async def scripts(ctx):
+  embed=discord.Embed(title="Scripts Archive #1", url=os.environ['first_scripts'], description="Archive of MyNameMadeYouSmile's scripts #1", color=random.randint(0, 0xffffff))
+  embed.set_author(name=ctx.message.author)
+  embed1=discord.Embed(title="Scripts Archive #2", url=os.environ['second_scripts'], description="Archive of MyNameMadeYouSmile's scripts #2", color=random.randint(0, 0xffffff))
+  embed1.set_author(name=ctx.message.author)
+  await ctx.send(embed=embed)
+  await ctx.send(embed=embed1)
   
 @client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
