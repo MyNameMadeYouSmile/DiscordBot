@@ -99,12 +99,14 @@ async def love(ctx, pupil1, pupil2):
   await ctx.send("There is a " + str(score) + "% chance that {} and {} love eachother.".format(pupil1, pupil2))
   
 @client.command(pass_context=True)
+@commands.has_permissions(administrator=True)
 async def clear(ctx):
   mgs = [] #Empty list to put all the messages in the log
   #number = int(number) #Converting the amount of messages to delete to an integer
   async for x in ctx.message.channel.history():
     mgs.append(x)
   await ctx.message.channel.delete_messages(mgs)
+  print("Successfully deleted all messages in chat.")
   
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
