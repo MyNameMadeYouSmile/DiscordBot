@@ -92,8 +92,8 @@ async def love(ctx, pupil1, pupil2):
   score = 100-(boi*gurl)-rnd
   await ctx.send("There is a " + str(score) + "% chance that {} and {} love eachother.".format(pupil1, pupil2))
   
-@Client.command(pass_context = True)
-async def clear(ctx, number):
+@client.command(pass_context=True)
+async def clear(ctx):
   mgs = [] #Empty list to put all the messages in the log
   #number = int(number) #Converting the amount of messages to delete to an integer
   async for x in Client.logs_from(ctx.message.channel):
