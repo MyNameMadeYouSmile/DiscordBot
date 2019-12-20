@@ -1,5 +1,6 @@
 import discord
 from discord.ext.commands import Bot
+from discord.ext.commands import CommandNotFound
 from discord.ext import *
 import os
 from googletrans import Translator
@@ -29,6 +30,12 @@ async def on_ready():
   await client.change_presence(status=discord.Status.online, activity=activity)
   print("Bot Name: {}".format(client.user.name))
   print("Bot ID: {}".format(client.user.id))
+  
+@client.event
+async def on_command_error(ctx, error):
+  if isinstance(error, CommandNotFound):
+    return await ctx.send(str(error)
+  raise error
   
 @client.command(pass_context=True)
 async def help(ctx):
