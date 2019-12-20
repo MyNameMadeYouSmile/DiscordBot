@@ -96,7 +96,7 @@ async def love(ctx, pupil1, pupil2):
 async def clear(ctx):
   mgs = [] #Empty list to put all the messages in the log
   #number = int(number) #Converting the amount of messages to delete to an integer
-  async for x in client.ctx.message.channel.history():
+  async for x in ctx.message.channel.history():
     mgs.append(x)
   await client.delete_messages(mgs)
   
