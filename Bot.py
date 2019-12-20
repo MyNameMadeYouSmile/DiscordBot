@@ -96,9 +96,9 @@ async def love(ctx, pupil1, pupil2):
 async def clear(ctx):
   mgs = [] #Empty list to put all the messages in the log
   #number = int(number) #Converting the amount of messages to delete to an integer
-  async for x in Client.logs_from(ctx.message.channel):
+  async for x in client.logs_from(ctx.message.channel):
     mgs.append(x)
-  await Client.delete_messages(mgs)
+  await client.delete_messages(mgs)
   
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
