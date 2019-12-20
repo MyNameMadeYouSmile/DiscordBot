@@ -34,7 +34,7 @@ async def on_ready():
 @client.event
 async def on_command_error(ctx, error):
   if isinstance(error, CommandNotFound):
-    return await ctx.send(str(error)
+    return await ctx.send(str(error))
   
 @client.command(pass_context=True)
 async def help(ctx):
