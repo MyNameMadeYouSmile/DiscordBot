@@ -98,7 +98,7 @@ async def clear(ctx):
   #number = int(number) #Converting the amount of messages to delete to an integer
   async for x in ctx.message.channel.history():
     mgs.append(x)
-  await client.delete_messages(mgs)
+  await ctx.message.channel.delete_messages(mgs)
   
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
