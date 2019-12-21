@@ -75,17 +75,21 @@ Swedish - sv  | Chech - cz   | Portuguese - pt```""")
     
 @client.command(pass_context=True)
 async def urban(ctx, *, term):
-  try:
-    url = 'http://api.urbandictionary.com/v0/define?term=%s' % (term)
-    res = urllib.request.urlopen(url) 
-    data = json.loads(res.read().decode('utf-8'))
-    definition = data['list'][0]['definition']
-    await ctx.send(definition)
-  except IndexError:
-    print("index error")
-    await ctx.send('There\'s no definition for this word.')
-  except urllib.error.URLError:
-    pass
+  if str(ctx.message.channel) != "bot-playground":
+    print(str(ctx.message.channel))
+    await ctx.send("Go to the #bot-playground channel to use the !urban command. Let's keep this channel clean.")
+  else:
+    try:
+      url = 'http://api.urbandictionary.com/v0/define?term=%s' % (term)
+      res = urllib.request.urlopen(url) 
+      data = json.loads(res.read().decode('utf-8'))
+      definition = data['list'][0]['definition']
+      await ctx.send(definition)
+    except IndexError:
+      print("index error")
+      await ctx.send('There\'s no definition for this word.')
+    except urllib.error.URLError:
+      pass
   
 @client.command(pass_context=True)
 async def love(ctx, pupil1, pupil2):
@@ -184,6 +188,10 @@ async def search(ctx, *, query):
 async def translate_error(error, ctx):
     return await error.send(error.message.author.mention + " Usage: !translate [from lang code] [to lang code] [sentence]")
  
+@searchgwa.error
+async def urban_error(error, ctx):
+    return await error.send(error.message.author.mention + " Usage: !searchgwa [type what you're looking for]")
+  
 @translate.error
 async def urban_error(error, ctx):
     return await error.send(error.message.author.mention + " Usage: !urban [term]")
