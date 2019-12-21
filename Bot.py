@@ -115,7 +115,7 @@ async def searchgwa(ctx, *, searchterm):
     resultnum = 1
     for searchgwa in reddit.subreddit('gonewildaudio').search(searchterm, limit=5):
       if len(searchgwa.title) > 256:
-      searchgwa.title = searchgwa.title[:253] + '...'
+        searchgwa.title = searchgwa.title[:253] + '...'
       time = searchgwa.created
       Date = datetime.datetime.fromtimestamp(time)
       embed=discord.Embed(title=searchgwa.title, url=searchgwa.url, description=searchgwa.selftext, color=0x5b5bff)
