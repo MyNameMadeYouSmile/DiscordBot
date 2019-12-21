@@ -192,7 +192,7 @@ async def translate_error(error, ctx):
 async def searchgwa_error(error, ctx):
     return await error.send(error.message.author.mention + " Usage: !searchgwa [type what you're looking for]")
   
-@translate.error
+@urban.error
 async def urban_error(error, ctx):
     return await error.send(error.message.author.mention + " Usage: !urban [term]")
   
