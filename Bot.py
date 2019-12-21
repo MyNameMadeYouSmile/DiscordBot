@@ -109,20 +109,23 @@ async def clear(ctx):
   
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
-  resultnum = 1
-  for searchgwa in reddit.subreddit('gonewildaudio').search(searchterm, limit=5):
-    if len(searchgwa.title) > 256:
+  if ctx.message.channel != 657209517288718366:
+    await ctx.send("Go to the #bot-playground channel to use the !searchgwa command. Let's keep this channel clean.")
+  else:
+    resultnum = 1
+    for searchgwa in reddit.subreddit('gonewildaudio').search(searchterm, limit=5):
+      if len(searchgwa.title) > 256:
       searchgwa.title = searchgwa.title[:253] + '...'
-    time = searchgwa.created
-    Date = datetime.datetime.fromtimestamp(time)
-    embed=discord.Embed(title=searchgwa.title, url=searchgwa.url, description=searchgwa.selftext, color=0x5b5bff)
-    embed.set_author(name="Result #" + str(resultnum))
+      time = searchgwa.created
+      Date = datetime.datetime.fromtimestamp(time)
+      embed=discord.Embed(title=searchgwa.title, url=searchgwa.url, description=searchgwa.selftext, color=0x5b5bff)
+      embed.set_author(name="Result #" + str(resultnum))
     #embed.set_thumbnail(url="https://www.redditstatic.com/desktop2x/img/avatar_over18.png")
-    embed.add_field(name="Post Author", value="/u/" + str(searchgwa.author), inline=True)
-    embed.add_field(name="Post Date", value=str(Date), inline=True)
+      embed.add_field(name="Post Author", value="/u/" + str(searchgwa.author), inline=True)
+      embed.add_field(name="Post Date", value=str(Date), inline=True)
     #embed.add_field(name="Content Warning", value="NSFW", inline=True)
-    await ctx.send(embed=embed)
-    resultnum += 1
+      await ctx.send(embed=embed)
+      resultnum += 1
   
 @client.command(pass_context=True)
 async def newgwa(ctx):
