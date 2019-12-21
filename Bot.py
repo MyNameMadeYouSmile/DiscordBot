@@ -100,7 +100,7 @@ async def love(ctx, pupil1, pupil2):
   
 @client.command(pass_context=True)
 async def clear(ctx):
-  if ctx.message.author.id != 649355698840535062:
+  if ctx.message.author.id != 649355698840535061:
     print(str(ctx.message.author) + " tried using the !clear command.")
   else:
     mgs = [] #Empty list to put all the messages in the log
