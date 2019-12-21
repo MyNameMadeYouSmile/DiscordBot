@@ -109,7 +109,7 @@ async def clear(ctx):
   
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
-  if not "bot-playground" in ctx.message.channel:
+  if str(ctx.message.channel) != "bot-playground":
     print(str(ctx.message.channel))
     await ctx.send("Go to the #bot-playground channel to use the !searchgwa command. Let's keep this channel clean.")
   else:
