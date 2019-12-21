@@ -100,12 +100,15 @@ async def love(ctx, pupil1, pupil2):
   
 @client.command(pass_context=True)
 async def clear(ctx):
-  mgs = [] #Empty list to put all the messages in the log
-  #number = int(number) #Converting the amount of messages to delete to an integer
-  async for x in ctx.message.channel.history():
-    mgs.append(x)
-  await ctx.message.channel.delete_messages(mgs)
-  print("Successfully deleted all messages in chat.")
+  if ctx.message.author.id != 649355698840535062:
+    print(str(ctx.message.author) + " tried using the !clear command.")
+  else:
+    mgs = [] #Empty list to put all the messages in the log
+    #number = int(number) #Converting the amount of messages to delete to an integer
+    async for x in ctx.message.channel.history():
+      mgs.append(x)
+    await ctx.message.channel.delete_messages(mgs)
+    print("Successfully deleted all messages in chat.")
   
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
