@@ -27,7 +27,8 @@ client.remove_command('help')
 @client.event
 async def on_ready():
   #activity = discord.Game(name="!help")
-  await client.change_presence(status=discord.Status.online, activity(name="Type !help"))
+  #await client.change_presence(status=discord.Status.online, activity(name="Type !help"))
+  await client.change_presence(activity.name = "Type !help")
   print("Bot Name: {}".format(client.user.name))
   print("Bot ID: {}".format(client.user.id))
   
