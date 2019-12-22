@@ -39,9 +39,9 @@ async def on_command_error(ctx, error):
   
 @client.event
 async def on_member_join(member):
-  new_channel = client.get_channel(657950668853739520)
+  new_channel = client.get_channel(657937578539876373)
   rules_channel = client.get_channel(657939389623697448)
-  main_channel = client.get_channel(657937578539876373)
+  main_channel = client.get_channel(657950668853739520)
   
   print(">> " + member.name + " has just joined The Smiley House.")
   await new_channel.send("Hello " + member.mention+ "! Welcome to **The Smiley House!** Please go to the " + rules_channel.mention + " channel and take a look at some of the rules you need to follow in order to stay.\n\nSay hello in " + main_channel.mention + " and I hope you have fun in Mike's server :)")
