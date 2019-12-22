@@ -120,7 +120,7 @@ async def clear(ctx):
 async def join(ctx):
   try:
     Channel = ctx.message.author.voice.channel
-    await Channel.connect()
+    await client.Channel.connect()
   except Exception as e:
     print(str(e))
     await ctx.send(str(e))
