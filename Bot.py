@@ -11,8 +11,7 @@ import requests
 from bs4 import BeautifulSoup
 import random
 import datetime
-import youtube_dl
-import asyncio
+import google
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -115,17 +114,6 @@ async def clear(ctx):
       mgs.append(x)
     await ctx.message.channel.delete_messages(mgs)
     print("Successfully deleted all messages in chat.")
-    
-@client.command(pass_context=True)
-async def join(ctx):
-  try:
-    #Channel = ctx.message.author.voice.channel
-    #await client.Channel.connect()
-    author = ctx.message.author
-    channel = author.voice.channel
-    await channel.connect()
-  except Exception as e:
-    print(e)
   
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
@@ -168,45 +156,36 @@ async def newgwa(ctx):
     await ctx.send("""```GWA Backstage
   
     """ + submission4.title + """```""")
-  
-@client.command(pass_context=True)
-async def leave(ctx):
-  await ctx.voice_client.disconnect()
-  
-@client.command(pass_context=True)
-async def play(ctx, url):
-  guild = ctx.message.guild
-  voice_client = guild.voice_client
-  player = await voice_client.create_ytdl_player(url)
-  player.start()
     
 @client.command(pass_context=True)
 async def search(ctx, *, query):
+  try:
+    google_url = "https://www.google.com/search?q=site:soundgasm.net+" + query + "&num=5"
+    response = requests.get(google_url)
+    soup = BeautifulSoup(response.text, "html.parser")
 
-  google_url = "https://www.google.com/search?q=site:soundgasm.net+" + query + "&num=5"
-  response = requests.get(google_url)
-  soup = BeautifulSoup(response.text, "html.parser")
+    result_div = soup.find_all('div', attrs = {'class': 'ZINbbc'})
 
-  result_div = soup.find_all('div', attrs = {'class': 'ZINbbc'})
-
-  links = []
-  titles = []
-  descriptions = []
-  for r in result_div:
-    link = r.find('a', href = True)
-    titleone = r.find('div', attrs={'class':'vvjwJb'}).get_text()
-    description = r.find('div', attrs={'class':'s3v9rd'}).get_text()
+    links = []
+    titles = []
+    descriptions = []
+    for r in result_div:
+      link = r.find('a', href = True)
+      titleone = r.find('div', attrs={'class':'vvjwJb'}).get_text()
+      description = r.find('div', attrs={'class':'s3v9rd'}).get_text()
         
-    if link != '' and titleone != '' and description != '': 
-      links.append(link['href'])
-      titles.append(titleone)
-      descriptions.append(description)
+      if link != '' and titleone != '' and description != '': 
+        links.append(link['href'])
+        titles.append(titleone)
+        descriptions.append(description)
         
-      embed=discord.Embed(title=titles[0], url=links[0], description=descriptions[0], color=0x5b5bff)
-      embed.add_field(name="[" + titles[1] + "](" + links[1] + ")", value=description[1], inline=False)
-      embed.add_field(name="[" + titles[2] + "](" + links[2] + ")", value=description[2], inline=False)
-      embed.add_field(name="[" + titles[3] + "](" + links[3] + ")", value=description[3], inline=False)
-      await ctx.send(embed=embed)
+        embed=discord.Embed(title=titles[0], url=links[0], description=descriptions[0], color=0x5b5bff)
+        embed.add_field(name="[" + titles[1] + "](" + links[1] + ")", value=description[1], inline=False)
+        embed.add_field(name="[" + titles[2] + "](" + links[2] + ")", value=description[2], inline=False)
+        embed.add_field(name="[" + titles[3] + "](" + links[3] + ")", value=description[3], inline=False)
+        await ctx.send(embed=embed)
+  except Exception as e:
+    print(e)
     
 @translate.error
 async def translate_error(error, ctx):
