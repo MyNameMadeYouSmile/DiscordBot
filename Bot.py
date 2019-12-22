@@ -26,8 +26,6 @@ reddit = praw.Reddit(client_id=os.environ['14_chars'], \
 
 client.remove_command('help')
 
-players = {}
-
 @client.event
 async def on_ready():
   activity = discord.Game(name="!help")
@@ -162,7 +160,7 @@ async def newgwa(ctx):
     
 @client.command(pass_context=True)
 async def join(ctx):
-  channel = ctx.author.voice.channel
+  channel = ctx.message.author.voice.channel
   await channel.connect()
   
 @client.command(pass_context=True)
@@ -174,7 +172,6 @@ async def play(ctx, url):
   guild = ctx.message.guild
   voice_client = guild.voice_client
   player = await voice_client.create_ytdl_player(url)
-  players[guild.id] = player
   player.start()
     
 @client.command(pass_context=True)
