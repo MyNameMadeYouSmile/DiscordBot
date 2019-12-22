@@ -160,8 +160,11 @@ async def newgwa(ctx):
     
 @client.command(pass_context=True)
 async def join(ctx):
-  channel = ctx.message.author.voice.channel
-  await channel.connect()
+  try:
+    channel = ctx.message.author.voice.channel
+    await channel.connect()
+  except error as e:
+    print(e)
   
 @client.command(pass_context=True)
 async def leave(ctx):
