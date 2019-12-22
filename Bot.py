@@ -163,6 +163,7 @@ async def join(ctx):
   try:
     channel = ctx.message.author.voice.channel
     await channel.connect()
+    print(str(channel))
   except error as e:
     print(e)
   
