@@ -11,6 +11,7 @@ import requests
 from bs4 import BeautifulSoup
 import random
 import datetime
+import youtube_dl
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -23,6 +24,8 @@ reddit = praw.Reddit(client_id=os.environ['14_chars'], \
                      password=os.environ['reddit_p'])
 
 client.remove_command('help')
+
+players = {}
 
 @client.event
 async def on_ready():
@@ -155,6 +158,25 @@ async def newgwa(ctx):
     await ctx.send("""```GWA Backstage
   
     """ + submission4.title + """```""")
+    
+@client.command(pass_context=True)
+async def join(ctx):
+  channel = ctx.message.author.voice.voice_channel
+  await client.join_voice_channel(channel)
+  
+@client.command(pass_context=True)
+async def leave(ctx):
+  guild = ctx.message.guild
+  voice_client = guild.voice_client
+  await voice_client.disconnect()
+  
+@client.command(pass_context=True)
+async def play(ctx, url):
+  guild = ctx.message.guild
+  voice_client = guild.voice_client
+  player = await voice_client.create_ytdl_player(url)
+  players[guild.id] = player
+  player.start()
     
 @client.command(pass_context=True)
 async def search(ctx, *, query):
