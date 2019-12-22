@@ -38,7 +38,7 @@ async def on_command_error(ctx, error):
     return await ctx.send(str(error))
   
 @client.event
-async def on_member_join(member):
+async def on_member_join(ctx, member):
   print(">> " + member.name + " has just joined The Smiley House.")
   await ctx.send("Hello " + member.mention+ "! Welcome to The Smiley House! Please go to #rules and read some of the rules you need to follow in order to stay and I hope you have fun in Mike's server :)")
   
