@@ -25,6 +25,12 @@ reddit = praw.Reddit(client_id=os.environ['14_chars'], \
 
 client.remove_command('help')
 
+new_channel = client.get_channel(657950668853739520)
+rules_channel = client.get_channel(657939389623697448)
+main_channel = client.get_channel(657937578539876373)
+gone_channel = client.get_channel(658375828496973824)
+bot_channel = client.get_channel(657209517288718366)
+
 @client.event
 async def on_ready():
   activity = discord.Game(name="!help")
@@ -40,16 +46,12 @@ async def on_command_error(ctx, error):
 @client.event
 async def on_member_join(member):
   print(">> " + member.name + " has just joined The Smiley House.")
-  channel = client.get_channel(657950668853739520)
-  rules_channel = client.get_channel(657939389623697448)
-  main_channel = client.get_channel(657937578539876373)
-  await channel.send("Hello " + member.mention+ "! Welcome to **The Smiley House!** Please go to the " + rules_channel.mention + " channel and take a look at some of the rules you need to follow in order to stay.\n\nSay hello in " + main_channel.mention + " and I hope you have fun in Mike's server :)")
+  await new_channel.send("Hello " + member.mention+ "! Welcome to **The Smiley House!** Please go to the " + rules_channel.mention + " channel and take a look at some of the rules you need to follow in order to stay.\n\nSay hello in " + main_channel.mention + " and I hope you have fun in Mike's server :)")
  
 @client.event
 async def on_member_remove(member):
   print(">> " + member.name + " has just left The Smiley House.")
-  channel = client.get_channel(658375828496973824)
-  await channel.send(">> " + member.mention + " just left the server :( We will miss you " + member.name + "!")
+  await gone_channel.send(">> " + member.mention + " just left the server :( We will miss you " + member.name + "!")
   
 @client.command(pass_context=True)
 async def help(ctx):
@@ -92,7 +94,7 @@ Swedish - sv  | Chech - cz   | Portuguese - pt```""")
 async def urban(ctx, *, term):
   if str(ctx.message.channel) != "bot-playground":
     print(str(ctx.message.channel))
-    await ctx.send("Go to the #bot-playground channel to use the !urban command. Let's keep this channel clean.")
+    await ctx.send("Go to the " + bot_channel.mention + " channel to use the !urban command. Let's keep this channel clean.")
   else:
     try:
       url = 'http://api.urbandictionary.com/v0/define?term=%s' % (term)
@@ -133,7 +135,7 @@ async def clear(ctx):
 async def searchgwa(ctx, *, searchterm):
   if str(ctx.message.channel) != "bot-playground":
     print(str(ctx.message.channel))
-    await ctx.send("Go to the #bot-playground channel to use the !searchgwa command. Let's keep this channel clean.")
+    await ctx.send("Go to the " + bot_channel.mention + " channel to use the !searchgwa command. Let's keep this channel clean.")
   else:
     resultnum = 1
     for searchgwa in reddit.subreddit('gonewildaudio').search(searchterm, limit=5):
