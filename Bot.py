@@ -152,7 +152,6 @@ async def searchgwa(ctx, *, searchterm):
       embed.add_field(name="Post Date", value=str(Date), inline=True)
       await ctx.send(embed=embed)
       resultnum += 1
-    await ctx.send("----------------------------------------------")
     
 @client.command(pass_context=True)
 async def search(ctx, *, query):
