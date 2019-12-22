@@ -41,7 +41,8 @@ async def on_command_error(ctx, error):
 async def on_member_join(member):
   print(">> " + member.name + " has just joined The Smiley House.")
   channel = client.get_channel(657950668853739520)
-  await channel.send("Hello " + member.mention+ "! Welcome to The Smiley House! Please go to #rules and read some of the rules you need to follow in order to stay and I hope you have fun in Mike's server :)")
+  rules_channel = client.get_channel(657939389623697448)
+  await channel.send("Hello " + member.mention+ "! Welcome to **The Smiley House!** Please go to the " + rules_channel.mention + " channel and take a look at some of the rules you need to follow in order to stay.\nI hope you have fun in Mike's server :)")
   
 @client.command(pass_context=True)
 async def help(ctx):
