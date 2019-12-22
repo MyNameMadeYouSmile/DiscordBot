@@ -13,6 +13,7 @@ import random
 import datetime
 import youtube_dl
 import asyncio
+import PyNaCl
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -119,7 +120,8 @@ async def clear(ctx):
 @client.command(pass_context=True)
 async def join(ctx):
   try:
-    await ctx.message.author.voice.channel.connect()
+    Channel = ctx.message.author.voice.channel
+    await Channel.connect()
   except Exception as e:
     print(e)
   
