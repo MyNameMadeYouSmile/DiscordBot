@@ -54,7 +54,7 @@ async def on_member_remove(member):
   
 @client.command(pass_context=True)
 async def help(ctx):
-  await ctx.send("Hello! I'm a naughty discord bot created by MyNameMadeYouSmile#8651 ! It's nice to meet you :)\n\nType !commands for the list of all my cool commands.")
+  await ctx.send("Hello! I'm a naughty discord bot created by MyNameMadeYouSmile#8651 ! It's nice to meet you :)\n\nType !commands for the list of all my cool commands!")
   
 @client.command(pass_context=True)
 async def commands(ctx):
