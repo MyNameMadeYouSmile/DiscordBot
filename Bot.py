@@ -161,14 +161,12 @@ async def newgwa(ctx):
     
 @client.command(pass_context=True)
 async def join(ctx):
-  channel = ctx.message.author.voice_channel
-  await client.join_voice_channel(channel)
+  channel = ctx.author.voice.channel
+  await channel.connect()
   
 @client.command(pass_context=True)
 async def leave(ctx):
-  guild = ctx.message.guild
-  voice_client = guild.voice_client
-  await voice_client.disconnect()
+  await ctx.voice_client.disconnect()
   
 @client.command(pass_context=True)
 async def play(ctx, url):
