@@ -13,7 +13,6 @@ import random
 import datetime
 import youtube_dl
 import asyncio
-import PyNaCl
 
 Client = discord.Client()
 bot_prefix= "!"
