@@ -37,6 +37,11 @@ async def on_command_error(ctx, error):
   if isinstance(error, CommandNotFound):
     return await ctx.send(str(error))
   
+@client.event
+async def on_member_join(member):
+  print(">> " + member.name + " has just joined The Smiley House.")
+  await ctx.send("Hello " + member.mention+ "! Welcome to The Smiley House! Please go to #rules and read some of the rules you need to follow in order to stay and I hope you have fun in Mike's server :)")
+  
 @client.command(pass_context=True)
 async def help(ctx):
   await ctx.send("Hello! I am a naughty discord bot created by MyNameMadeYouSmile. I can't do much right now, cause I'm still under development, but it's nice to meet you anyways :) Type !commands for the list of all cool commands you can use.")
