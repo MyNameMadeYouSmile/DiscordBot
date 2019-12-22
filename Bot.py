@@ -115,6 +115,12 @@ async def clear(ctx):
       mgs.append(x)
     await ctx.message.channel.delete_messages(mgs)
     print("Successfully deleted all messages in chat.")
+    
+@client.command(pass_context=True)
+async def join(ctx):
+  channel = ctx.message.author.voice.channel
+  await channel.connect()
+  print(str(channel))
   
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
@@ -157,15 +163,6 @@ async def newgwa(ctx):
     await ctx.send("""```GWA Backstage
   
     """ + submission4.title + """```""")
-    
-@client.command(pass_context=True)
-async def join(ctx):
-  try:
-    channel = ctx.message.author.voice.channel
-    await channel.connect()
-    print(str(channel))
-  except error as e:
-    print(e)
   
 @client.command(pass_context=True)
 async def leave(ctx):
