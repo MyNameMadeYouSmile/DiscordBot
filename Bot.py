@@ -118,7 +118,7 @@ async def clear(ctx):
     
 @client.command(pass_context=True)
 async def join(ctx):
-  await ctx.message.author.voice.channel.connect()
+  await ctx.author.voice.channel.connect()
   
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
