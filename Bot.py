@@ -134,7 +134,7 @@ async def clear(ctx):
   
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
-  if str(ctx.message.channel) != "GWABot":
+  if str(ctx.message.channel) != "Direct Message with " + str(ctx.message.author):
     # if str(ctx.message.channel) != "bot-playground"
     print(str(ctx.message.channel))
     #bot_channel = client.get_channel(657209517288718366)
