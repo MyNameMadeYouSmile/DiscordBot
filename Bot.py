@@ -43,6 +43,12 @@ async def on_member_join(member):
   channel = client.get_channel(657950668853739520)
   rules_channel = client.get_channel(657939389623697448)
   await channel.send("Hello " + member.mention+ "! Welcome to **The Smiley House!** Please go to the " + rules_channel.mention + " channel and take a look at some of the rules you need to follow in order to stay.\n\nI hope you have fun in Mike's server :)")
+ 
+@client.event
+async def on_member_remove(member):
+  print(">> " + member.name + " has just left The Smiley House.")
+  channel = client.get_channel(658375828496973824)
+  await channel.send(">> " + member.mention + " just left the server :( We will miss you " + member.name + "!")
   
 @client.command(pass_context=True)
 async def help(ctx):
