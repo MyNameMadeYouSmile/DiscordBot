@@ -122,7 +122,8 @@ async def join(ctx):
     Channel = ctx.message.author.voice.channel
     await Channel.connect()
   except Exception as e:
-    print(e)
+    print(str(e))
+    await ctx.send(str(e))
   
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
