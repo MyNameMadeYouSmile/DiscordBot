@@ -135,9 +135,7 @@ async def clear(ctx):
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
   if str(ctx.message.channel) != "Direct Message with " + str(ctx.message.author):
-    # if str(ctx.message.channel) != "bot-playground"
     print(str(ctx.message.channel))
-    #bot_channel = client.get_channel(657209517288718366)
     await ctx.send("Please PM me to use the !searchgwa command. Let's keep the server clean.")
   else:
     print(str(ctx.message.channel))
@@ -149,33 +147,12 @@ async def searchgwa(ctx, *, searchterm):
       Date = datetime.datetime.fromtimestamp(time)
       embed=discord.Embed(title=searchgwa.title, url=searchgwa.url, description=searchgwa.selftext, color=0x5b5bff)
       embed.set_author(name="Result #" + str(resultnum))
-    #embed.set_thumbnail(url="https://www.redditstatic.com/desktop2x/img/avatar_over18.png")
+      embed.set_thumbnail(url=searchgwa.author.icon_img) #"https://www.redditstatic.com/desktop2x/img/avatar_over18.png"
       embed.add_field(name="Post Author", value="/u/" + str(searchgwa.author), inline=True)
       embed.add_field(name="Post Date", value=str(Date), inline=True)
     #embed.add_field(name="Content Warning", value="NSFW", inline=True)
       await ctx.send(embed=embed)
       resultnum += 1
-  
-@client.command(pass_context=True)
-async def newgwa(ctx):
-  for submission1 in reddit.subreddit('gonewildaudio').new(limit=1):
-    await ctx.send("""```Gone Wild Audio
-  
-    """ + submission1.title + """```""")
-  for submission2 in reddit.subreddit('gonewildaudible').new(limit=1):
-    await ctx.send("""```Gone Wild Audible
-  
-    """ + submission2.title + """```""")
-    
-  for submission3 in reddit.subreddit('gwascriptguild').new(limit=1):
-    await ctx.send("""```GWA Script Guild
-  
-    """ + submission3.title + """```""")
-    
-  for submission4 in reddit.subreddit('gwabackstage').new(limit=1):
-    await ctx.send("""```GWA Backstage
-  
-    """ + submission4.title + """```""")
     
 @client.command(pass_context=True)
 async def search(ctx, *, query):
