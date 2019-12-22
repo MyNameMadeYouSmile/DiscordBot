@@ -145,7 +145,7 @@ async def searchgwa(ctx, *, searchterm):
         searchgwa.title = searchgwa.title[:253] + '...'
       time = searchgwa.created
       Date = datetime.datetime.fromtimestamp(time)
-      embed=discord.Embed(title=searchgwa.title, url=searchgwa.url, description=searchgwa.selftext, color=0x5b5bff)
+      embed=discord.Embed(title=searchgwa.title, url=searchgwa.url, description=searchgwa.selftext, color=random.randint(0, 0xffffff)) #color=0x5b5bff
       embed.set_author(name="Result #" + str(resultnum))
       embed.set_thumbnail(url=searchgwa.author.icon_img) #"https://www.redditstatic.com/desktop2x/img/avatar_over18.png"
       embed.add_field(name="Post Author", value="/u/" + str(searchgwa.author), inline=True)
