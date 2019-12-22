@@ -6,3 +6,4 @@ requests
 fake-useragent
 bs4
 youtube_dl
+PyNaCl
