@@ -134,11 +134,14 @@ async def clear(ctx):
   
 @client.command(pass_context=True)
 async def searchgwa(ctx, *, searchterm):
-  if str(ctx.message.channel) != "bot-playground":
+  if str(ctx.message.channel) != "GWABot":
+    # if str(ctx.message.channel) != "bot-playground"
     print(str(ctx.message.channel))
-    bot_channel = client.get_channel(657209517288718366)
-    await ctx.send("Go to the " + bot_channel.mention + " channel to use the !searchgwa command. Let's keep this channel clean.")
+    #bot_channel = client.get_channel(657209517288718366)
+    await ctx.send("Please PM me to use the !searchgwa command. Let's keep the server clean.")
   else:
+    member_id = ctx.message.author.id
+    member_channel = client.get_channel(member_id)
     resultnum = 1
     for searchgwa in reddit.subreddit('gonewildaudio').search(searchterm, limit=5):
       if len(searchgwa.title) > 256:
@@ -151,7 +154,7 @@ async def searchgwa(ctx, *, searchterm):
       embed.add_field(name="Post Author", value="/u/" + str(searchgwa.author), inline=True)
       embed.add_field(name="Post Date", value=str(Date), inline=True)
     #embed.add_field(name="Content Warning", value="NSFW", inline=True)
-      await ctx.send(embed=embed)
+      await member_channel.send(embed=embed)
       resultnum += 1
   
 @client.command(pass_context=True)
