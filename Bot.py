@@ -141,9 +141,6 @@ async def searchgwa(ctx, *, searchterm):
     await ctx.send("Please PM me to use the !searchgwa command. Let's keep the server clean.")
   else:
     print(str(ctx.message.channel))
-    member_id = ctx.message.author.id
-    member_channel = client.get_channel(member_id)
-    print(str(member_channel))
     resultnum = 1
     for searchgwa in reddit.subreddit('gonewildaudio').search(searchterm, limit=5):
       if len(searchgwa.title) > 256:
@@ -156,7 +153,7 @@ async def searchgwa(ctx, *, searchterm):
       embed.add_field(name="Post Author", value="/u/" + str(searchgwa.author), inline=True)
       embed.add_field(name="Post Date", value=str(Date), inline=True)
     #embed.add_field(name="Content Warning", value="NSFW", inline=True)
-      await member_channel.send(embed=embed)
+      await ctx.send(embed=embed)
       resultnum += 1
   
 @client.command(pass_context=True)
