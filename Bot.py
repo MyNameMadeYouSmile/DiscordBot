@@ -1,7 +1,6 @@
 import discord
 from discord.ext.commands import Bot
 from discord.ext.commands import CommandNotFound
-from discord import Game
 from discord.ext import *
 import os
 from googletrans import Translator
@@ -125,8 +124,7 @@ async def clear(ctx):
   if ctx.message.author.id != 649355698840535061:
     print(str(ctx.message.author) + " tried using the !clear command.")
   else:
-    mgs = [] #Empty list to put all the messages in the log
-    #number = int(number) #Converting the amount of messages to delete to an integer
+    mgs = []
     async for x in ctx.message.channel.history():
       mgs.append(x)
     await ctx.message.channel.delete_messages(mgs)
@@ -152,36 +150,6 @@ async def searchgwa(ctx, *, searchterm):
       embed.add_field(name="Post Date", value=str(Date), inline=True)
       await ctx.send(embed=embed)
       resultnum += 1
-    
-@client.command(pass_context=True)
-async def search(ctx, *, query):
-  try:
-    google_url = "https://www.google.com/search?q=site:soundgasm.net+" + query + "&num=5"
-    response = requests.get(google_url)
-    soup = BeautifulSoup(response.text, "html.parser")
-
-    result_div = soup.find_all('div', attrs = {'class': 'ZINbbc'})
-
-    links = []
-    titles = []
-    descriptions = []
-    for r in result_div:
-      link = r.find('a', href = True)
-      titleone = r.find('div', attrs={'class':'vvjwJb'}).get_text()
-      description = r.find('div', attrs={'class':'s3v9rd'}).get_text()
-        
-      if link != '' and titleone != '' and description != '': 
-        links.append(link['href'])
-        titles.append(titleone)
-        descriptions.append(description)
-        
-        embed=discord.Embed(title=titles[0], url=links[0], description=descriptions[0], color=0x5b5bff)
-        embed.add_field(name="[" + titles[1] + "](" + links[1] + ")", value=description[1], inline=False)
-        embed.add_field(name="[" + titles[2] + "](" + links[2] + ")", value=description[2], inline=False)
-        embed.add_field(name="[" + titles[3] + "](" + links[3] + ")", value=description[3], inline=False)
-        await ctx.send(embed=embed)
-  except Exception as e:
-    print(e)
     
 @translate.error
 async def translate_error(error, ctx):
