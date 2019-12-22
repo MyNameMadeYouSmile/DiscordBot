@@ -12,6 +12,7 @@ from bs4 import BeautifulSoup
 import random
 import datetime
 import youtube_dl
+import asyncio
 
 Client = discord.Client()
 bot_prefix= "!"
