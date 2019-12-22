@@ -11,7 +11,6 @@ import requests
 from bs4 import BeautifulSoup
 import random
 import datetime
-import google
 
 Client = discord.Client()
 bot_prefix= "!"
