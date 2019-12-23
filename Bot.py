@@ -82,8 +82,8 @@ async def commands(ctx):
 async def chat(ctx, *, message):
   await cb.init()
   response = await cb.getResponse(message)
-  print(response)
-  ctx.send(response)
+  print(str(response))
+  ctx.send(str(response))
   await cb.close()
   
 @client.command(pass_context=True)
