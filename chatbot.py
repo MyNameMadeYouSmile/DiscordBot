@@ -21,7 +21,7 @@ for intent in chatdata["intents"]:
     wrds = nltk.word_tokenize(pattern)
     words.extend(wrds)
     docs_x.append(pattern)
-    docx_y.append(intent["tag"]
+    docx_y.append(intent["tag"])
     
   if intent["tag"] not in labels:
     labels.append(intent["tag"])
@@ -36,4 +36,22 @@ output = []
 
 out_empty = [0 for _ in range(len(classes))]
 
-for doc in docs_x:
+for x, doc in enumerate(docs_x):
+  bag = []
+  
+  wrds = [stemmer.stem(w) for w in doc]
+  
+  for w in words:
+    if w in wrds:
+      bag.append(1)
+    else:
+      bag.append(0)
+      
+  output_row = out_empty[:]
+  output_row[labels.index(docs_y[x])] = 1
+  
+  training.append(bag)
+  output.append(output_row)
+  
+training = numpy.array(training)
+output = np.array(output)
