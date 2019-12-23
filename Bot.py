@@ -102,6 +102,7 @@ async def join(ctx):
       await ctx.send("I has joined the " + channel + "! I'm ready to be used as a DJ.")
     except Exception as e:
       print(e)
+      pass
     
 @client.command(pass_context=True)
 async def leave(ctx):
