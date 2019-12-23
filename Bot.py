@@ -27,8 +27,6 @@ reddit = praw.Reddit(client_id=os.environ['14_chars'], \
 
 client.remove_command('help')
 
-cb = CleverBot()
-
 @client.event
 async def on_ready():
   activity = discord.Game(name="!help")
@@ -80,10 +78,10 @@ async def commands(ctx):
   
 @client.command(pass_context=True)
 async def chat(ctx, *, message):
+  cb = CleverBot()
   await cb.init()
   response = await cb.getResponse(message)
-  print(str(response))
-  ctx.send(str(response))
+  ctx.send(response)
   await cb.close()
   
 @client.command(pass_context=True)
