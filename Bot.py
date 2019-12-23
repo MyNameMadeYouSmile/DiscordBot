@@ -82,6 +82,7 @@ async def commands(ctx):
 async def chat(ctx, *, message):
   await cb.init()
   response = await cb.getResponse(message)
+  print(response)
   ctx.send(response)
   await cb.close()
   
