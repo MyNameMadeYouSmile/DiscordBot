@@ -1,9 +1,9 @@
 discord.py
-discord.py[voice]
+-U discord.py[voice]
 googletrans
 praw
 requests
 fake-useragent
 bs4
-youtube_dl
+youtube-dl
 pynacl
