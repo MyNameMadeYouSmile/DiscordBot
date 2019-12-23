@@ -81,24 +81,27 @@ async def join(ctx):
     voice_channel = client.get_channel(658656082121588750)
     await ctx.send("Go to the " + voice_channel.mention + " channel to use the !join command.")
   else:
-    global voice
-    channel = ctx.message.author.voice.channel
-    voice = get(client.voice_clients, guild=ctx.guild)
+    try:
+      global voice
+      channel = ctx.message.author.voice.channel
+      voice = get(client.voice_clients, guild=ctx.guild)
   
-    if voice and voice.is_connected():
-      await voice.move_to(channel)
-    else:
-      voice = await channel.connect()
+      if voice and voice.is_connected():
+        await voice.move_to(channel)
+      else:
+        voice = await channel.connect()
     
-    await voice.disconnect()
+      await voice.disconnect()
   
-    if voice and voice.is_connected():
-      await voice.move_to(channel)
-    else:
-      voice = await channel.connect()
-      print("The Naughty Bot has connected to a voice channel: " + channel)
+      if voice and voice.is_connected():
+        await voice.move_to(channel)
+      else:
+        voice = await channel.connect()
+        print("The Naughty Bot has connected to a voice channel: " + channel)
       
-    await ctx.send("I has joined the " + channel + "! I'm ready to be used as a DJ.")
+      await ctx.send("I has joined the " + channel + "! I'm ready to be used as a DJ.")
+    except Exception as e:
+      print(e)
     
 @client.command(pass_context=True)
 async def leave(ctx):
