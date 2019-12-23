@@ -1,6 +1,7 @@
 import discord
 from discord.ext.commands import Bot
 from discord.ext.commands import CommandNotFound
+from discord.utils import get
 from discord.ext import *
 import os
 from googletrans import Translator
@@ -11,6 +12,7 @@ import requests
 from bs4 import BeautifulSoup
 import random
 import datetime
+import youtube_dl
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -72,6 +74,48 @@ async def commands(ctx):
 !searchgwa - Search for posts in gonewildaudio (5 posts per request).
 
 !love - Calculate the possibility of two users loving eachother.```""")
+  
+@client.command(pass_context=True)
+async def join(ctx):
+  if str(ctx.message.channel) != "voice-text":
+    voice_channel = client.get_channel(658656082121588750)
+    await ctx.send("Go to the " + voice_channel.mention + " channel to use the !join command.")
+  else:
+    global voice
+    channel = ctx.message.author.voice.channel
+    voice = get(client.voice_clients, guild=ctx.guild)
+  
+    if voice and voice.is_connected():
+      await voice.move_to(channel)
+    else:
+      voice = await channel.connect()
+      print("The Naughty Bot has connected to a voice channel: " + channel)
+    
+    #await voice.disconnect()
+  
+    #if voice and voice.is_connected():
+     # await voice.move_to(channel)
+    #else:
+     # voice = await channel.connect()
+      #print("The Naughty Bot has connected to a voice channel: " + channel)
+      
+    await ctx.send("I has joined the " + channel + "! I'm ready to be used as a DJ.")
+    
+@client.command(pass_context=True)
+async def leave(ctx):
+  if str(ctx.message.channel) != "voice-text":
+    voice_channel = client.get_channel(658656082121588750)
+    await ctx.send("Go to the " + voice_channel.mention + " channel to use the !join command.")
+  else:
+    channel = ctx.message.author.voice.channel
+    voice = get(client.voice_clients, guild=ctx.guild)
+    
+    if voice and voice.is_connected():
+      await voice.disconnect()
+      print("The Naughty Bot has left the voice channel: " + channel)
+      await ctx.send("I has left the " + channel + " :( I can no longer be used as a DJ.")
+    else:
+      print(">> " + str(ctx.message.author) + " tried to kick me out of a channel that the bot isn't in.")
   
 @client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
