@@ -12,16 +12,7 @@ import requests
 from bs4 import BeautifulSoup
 import random
 import datetime
-import youtube_dl
 import asyncio
-
-if not discord.opus.is_loaded():
-  # the 'opus' library here is opus.dll on windows
-  # or libopus.so on linux in the current directory
-  # you should replace this with the location the
-  # opus library is located in and with the proper filename.
-  # note that on windows this DLL is automatically provided for you
-  discord.opus.load_opus('opus')
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -83,47 +74,6 @@ async def commands(ctx):
 !searchgwa - Search for posts in gonewildaudio (5 posts per request).
 
 !love - Calculate the possibility of two users loving eachother.```""")
-  
-@client.command(pass_context=True)
-async def join(ctx):
-  if str(ctx.message.channel) != "voice-text":
-    voice_channel = client.get_channel(658656082121588750)
-    await ctx.send("Go to the " + voice_channel.mention + " channel to use the !join command.")
-  else:
-    global voice
-    channel = ctx.message.author.voice.channel
-    voice = get(client.voice_clients, guild=ctx.guild)
-  
-    if voice and voice.is_connected():
-      await voice.move_to(channel)
-    else:
-      voice = await channel.connect()
-    
-    await voice.disconnect()
-  
-    if voice and voice.is_connected():
-      await voice.move_to(channel)
-    else:
-      voice = await channel.connect()
-      print("The Naughty Bot has connected to a voice channel: " + channel)
-      
-    await ctx.send("I has joined the " + channel + "! I'm ready to be used as a DJ.")
-    
-@client.command(pass_context=True)
-async def leave(ctx):
-  if str(ctx.message.channel) != "voice-text":
-    voice_channel = client.get_channel(658656082121588750)
-    await ctx.send("Go to the " + voice_channel.mention + " channel to use the !join command.")
-  else:
-    channel = ctx.message.author.voice.channel
-    voice = get(client.voice_clients, guild=ctx.guild)
-    
-    if voice and voice.is_connected():
-      await voice.disconnect()
-      print("The Naughty Bot has left the voice channel: " + channel)
-      await ctx.send("I has left the " + channel + " :( I can no longer be used as a DJ.")
-    else:
-      print(">> " + str(ctx.message.author) + " tried to kick me out of a channel that the bot isn't in.")
   
 @client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
