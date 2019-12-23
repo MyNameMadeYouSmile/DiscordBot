@@ -1,8 +1,12 @@
+discord.py[voice]>=1.2.5
+youtube_dl>=2019.10.16
+aiohttp>=3.3.0,<3.6.0
+websockets>=6.0,<7.0
+chardet
+opuslib
+pynacl==1.2.1
 googletrans
-discord.py[voice] == 1.2.4
 praw
 requests
 fake-useragent
 bs4
-youtube-dl
-pynacl
