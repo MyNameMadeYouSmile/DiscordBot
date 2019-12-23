@@ -12,6 +12,7 @@ import requests
 from bs4 import BeautifulSoup
 import random
 import datetime
+from cleverbot_aio_free.cbaio import CleverBot
 import asyncio
 
 Client = discord.Client()
@@ -25,6 +26,8 @@ reddit = praw.Reddit(client_id=os.environ['14_chars'], \
                      password=os.environ['reddit_p'])
 
 client.remove_command('help')
+
+cb = CleverBot()
 
 @client.event
 async def on_ready():
@@ -74,6 +77,13 @@ async def commands(ctx):
 !searchgwa - Search for posts in gonewildaudio (5 posts per request).
 
 !love - Calculate the possibility of two users loving eachother.```""")
+  
+@client.command(pass_context=True)
+async def chat(ctx, *, message):
+  await cb.init()
+  response = await cb.getResponse(message)
+  ctx.send(response)
+  await cb.close()
   
 @client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
