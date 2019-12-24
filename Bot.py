@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 import random
 import datetime
 import asyncio
-from cleverbot_aio_free.cbaio import CleverBot
+from mycleverbot import CleverBot
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -30,7 +30,7 @@ cb = CleverBot()
 client.remove_command('help')
 
 async def chatbot(message):
-  await cb.init(args: ['--no-sandbox'])
+  await cb.init()
   response = await cb.getResponse(message)
   print(response)
   await cb.close()
