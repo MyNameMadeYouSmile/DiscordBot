@@ -78,6 +78,12 @@ async def chat(ctx, *, message):
   asyncio.get_event_loop().run_until_complete(chatbot(ctx, str(message)))
   
 @client.command(pass_context=True)
+async def randcol(ctx):
+  hexcolor = str(random.randint(0, 0xffffff))[1:]
+  rgbcolor = str(tuple(int(hexcolor[i:i+2], 16) for i in (0, 2, 4))))
+  print(">> rgb: " + rgbcolor + " / hex: " + hexcolor)
+  
+@client.command(pass_context=True)
 async def help(ctx):
   await ctx.send("Hello! I'm a naughty discord bot created by MyNameMadeYouSmile#8651 ! It's nice to meet you :)\n\nType !commands for the list of all my cool commands!")
   
