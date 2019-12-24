@@ -94,12 +94,17 @@ async def randcol(ctx):
   z = a + b + c
   
   hexcolor = z.upper()
-  #rgbcolor = tuple(int(hexcolor[i:i+2], 16) for i in (0, 2, 4))
-  rgbcolor = int(hexcolor[i:i+2], 16)
+  rgbcolor = tuple(int(hexcolor[i:i+2], 16) for i in (0, 2, 4))
+  red = rgbcolor[0]
+  green = rgbcolor[1]
+  blue = rgbcolor[2]
   
   print(">> RGB: " + str(rgbcolor) + " / HEX: " + "#" + hexcolor)
-  #embed=discord.Embed(title="Generated New Color", description="**Hex Color: #" + hexcolor + " / RGB Color: " + str(rgbcolor) + "**", color=int("0x" + hexcolor))
-  #await ctx.send(embed=embed)
+  embed=discord.Embed(title="Generated New Color", color="0x" + hexcolor)
+  embed.set_author(name=str(ctx.message.author.name))
+  embed.add_field(name="RGB Color", value=str(rgbcolor), inline=True)
+  embed.add_field(name="Hex Color", value="#" + hexcolor, inline=True)
+  await ctx.send(embed=embed)
   
 @client.command(pass_context=True)
 async def help(ctx):
