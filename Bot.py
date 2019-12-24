@@ -31,18 +31,6 @@ goingOn = True
 
 client.remove_command('help')
 
-async def chatterbot(ctx, message):
-  await cb.init()
-  while(goingOne):
-    if message.lower().find("end") != -1:
-      break
-    response = await cb.getResponse(message)
-    await ctx.send(ctx.message.author.mention + " " + response)
-    answer = await ctx.wait_for_message(timeout=120)
-    if answer is None:
-      goingOn = False
-      await cb.close()
-
 async def chatbot(ctx, message):
   await cb.init()
   response = await cb.getResponse(message)
@@ -88,7 +76,7 @@ async def on_message(message):
     
 @client.command(pass_context=True)
 async def chat(ctx, *, message):
-  asyncio.get_event_loop().run_until_complete(chatterbot(ctx, message))
+  asyncio.get_event_loop().run_until_complete(chatbot(ctx, message))
   
 @client.command(pass_context=True)
 async def help(ctx):
