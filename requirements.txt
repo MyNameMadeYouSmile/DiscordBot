@@ -3,3 +3,4 @@ googletrans
 praw
 requests
 bs4
+pyppeteer
