@@ -77,8 +77,8 @@ async def on_message(message):
 async def chat(ctx, *, message):
   asyncio.get_event_loop().run_until_complete(chatbot(ctx, str(message)))
   
-@client.command(pass_context=True)
-async def randcol(ctx):
+@client.command(pass_context=True, aliases=['randcol', 'rc'])
+async def randomcolor(ctx):
   a = hex(random.randrange(0,256))
   b = hex(random.randrange(0,256))
   c = hex(random.randrange(0,256))
@@ -132,7 +132,7 @@ async def commands(ctx):
 
 !chat - Chat with an AI bot.
 
-!randcol - Generate random RGB & HEX color.```""")
+!randomcolor - Generate random RGB & HEX color. Command aliases: !randcol, !rc```""")
   
 @client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
