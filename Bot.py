@@ -27,7 +27,6 @@ reddit = praw.Reddit(client_id=os.environ['14_chars'], \
                      password=os.environ['reddit_p'])
 
 cb = CleverBot()
-goingOn = True
 
 client.remove_command('help')
 
