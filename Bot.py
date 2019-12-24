@@ -88,8 +88,7 @@ async def on_message(message):
     
 @client.command(pass_context=True)
 async def chat(ctx, *, message):
-  asyncio.run(chatterbot(ctx, message))
-  #asyncio.get_event_loop().run_until_complete(chatbot(ctx, message))
+  asyncio.get_event_loop().run_until_complete(chatterbot(ctx, message))
   
 @client.command(pass_context=True)
 async def help(ctx):
