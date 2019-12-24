@@ -58,6 +58,7 @@ async def on_member_remove(member):
 async def on_message(message):
   if message.content.startswith("!"):
     print(">> " + message.author.name + ": " + message.content)
+    await client.process_commands(message)
   
 @client.command(pass_context=True)
 async def help(ctx):
