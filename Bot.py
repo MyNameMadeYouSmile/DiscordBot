@@ -100,11 +100,15 @@ async def randcol(ctx):
   blue = rgbcolor[2]
   
   print(">> RGB: " + str(rgbcolor) + " / HEX: " + "#" + hexcolor)
-  embed=discord.Embed(title="Generated New Color", color="0x" + hexcolor)
-  embed.set_author(name=ctx.message.author.name)
-  embed.add_field(name="RGB Color", value=str(rgbcolor), inline=True)
-  embed.add_field(name="Hex Color", value="#" + hexcolor, inline=True)
-  await ctx.send(embed=embed)
+  try:
+    newhex = "0x" + hexcolor
+    embed=discord.Embed(title="Generated New Color", color=newhex)
+    embed.set_author(name=ctx.message.author.name)
+    embed.add_field(name="RGB Color", value=str(rgbcolor), inline=True)
+    embed.add_field(name="Hex Color", value="#" + hexcolor, inline=True)
+    await ctx.send(embed=embed)
+  except Exception as e:
+    print(e)
   
 @client.command(pass_context=True)
 async def help(ctx):
