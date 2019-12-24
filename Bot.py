@@ -26,6 +26,12 @@ reddit = praw.Reddit(client_id=os.environ['14_chars'], \
 
 client.remove_command('help')
 
+async def chatbot(message):
+  await cb.init()
+  response = await cb.getResponse(message)
+  print(response)
+  await cb.close()
+
 @client.event
 async def on_ready():
   activity = discord.Game(name="!help")
@@ -59,6 +65,10 @@ async def on_message(message):
   if message.content.startswith("!"):
     print(">> " + message.author.name + ": " + message.content)
     await client.process_commands(message)
+    
+@client.command(pass_context=True)
+async def chat(ctx, *, message):
+  asyncio.get_event_loop().run_until_complete(main(message))
   
 @client.command(pass_context=True)
 async def help(ctx):
