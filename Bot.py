@@ -104,7 +104,9 @@ async def commands(ctx):
 
 !love - Calculate the possibility of two users loving eachother.
 
-!chat - Chat with an AI bot.```""")
+!chat - Chat with an AI bot.
+
+!randcol - Generate random RGB & HEX color.```""")
   
 @client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
