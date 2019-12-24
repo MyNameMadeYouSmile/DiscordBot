@@ -80,7 +80,7 @@ async def chat(ctx, *, message):
 @client.command(pass_context=True)
 async def randcol(ctx):
   hexcolor = str(random.randint(0, 0xffffff))[1:]
-  rgbcolor = tuple(int(hexcolor[i:i+2], 16) for i in (0, 2, 4)))
+  rgbcolor = tuple(int(hexcolor[i:i+2], 16) for i in (0, 2, 4))
   print(">> rgb: " + str(rgbcolor) + " / hex: " + hexcolor)
   
 @client.command(pass_context=True)
