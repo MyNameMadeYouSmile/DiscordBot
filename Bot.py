@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 import random
 import datetime
 import asyncio
+from cleverbot_aio_free.cbaio import CleverBot
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -23,6 +24,8 @@ reddit = praw.Reddit(client_id=os.environ['14_chars'], \
                      user_agent='Tester', \
                      username=os.environ['reddit_u'], \
                      password=os.environ['reddit_p'])
+
+cb = CleverBot()
 
 client.remove_command('help')
 
