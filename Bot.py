@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 import random
 import datetime
 import asyncio
+import mycleverbot
 from mycleverbot import CleverBot
 
 Client = discord.Client()
@@ -32,7 +33,7 @@ client.remove_command('help')
 async def chatbot(message):
   await cb.init()
   response = await cb.getResponse(message)
-  print(response)
+  return response
   await cb.close()
 
 @client.event
@@ -71,7 +72,7 @@ async def on_message(message):
     
 @client.command(pass_context=True)
 async def chat(ctx, *, message):
-  asyncio.get_event_loop().run_until_complete(chatbot(message))
+  ctx.send(message.author.mention + " " + asyncio.get_event_loop().run_until_complete(chatbot(message)))
   
 @client.command(pass_context=True)
 async def help(ctx):
