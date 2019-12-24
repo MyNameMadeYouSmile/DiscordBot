@@ -30,7 +30,7 @@ cb = CleverBot()
 client.remove_command('help')
 
 async def chatbot(message):
-  await cb.init({args: ['--no-sandbox']})
+  await cb.init(args: ['--no-sandbox'])
   response = await cb.getResponse(message)
   print(response)
   await cb.close()
