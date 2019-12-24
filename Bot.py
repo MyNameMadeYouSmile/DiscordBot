@@ -15,6 +15,8 @@ import datetime
 import asyncio
 import mycleverbot
 from mycleverbot import CleverBot
+from PIL import Image
+from PIL import ImageDraw
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -92,10 +94,13 @@ async def randcol(ctx):
   if len(c)<2:
     c = "0" + c
   z = a + b + c
+  
   hexcolor = z.upper()
-  #hexcolor = str(random.randint(0, 0xffffff))[1:]
   rgbcolor = tuple(int(hexcolor[i:i+2], 16) for i in (0, 2, 4))
-  print(">> rgb: " + str(rgbcolor) + " / hex: " + "#" + hexcolor)
+  
+  print(">> RGB: " + str(rgbcolor) + " / HEX: " + "#" + hexcolor)
+  embed=discord.Embed(title="Generated New Color", description="Hex Color: #" + hexcolor + " / RGB Color: " + str(rgbcolor), color=int("0x" + hexcolor))
+  await ctx.send(embed=embed)
   
 @client.command(pass_context=True)
 async def help(ctx):
