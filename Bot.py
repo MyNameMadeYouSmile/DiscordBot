@@ -79,9 +79,23 @@ async def chat(ctx, *, message):
   
 @client.command(pass_context=True)
 async def randcol(ctx):
-  hexcolor = str(random.randint(0, 0xffffff))[1:]
+  a = hex(random.randrange(0,256))
+  b = hex(random.randrange(0,256))
+  c = hex(random.randrange(0,256))
+  a = a[2:]
+  b = b[2:]
+  c = c[2:]
+  if len(a)<2:
+    a = "0" + a
+  if len(b)<2:
+    b = "0" + b
+  if len(c)<2:
+    c = "0" + c
+  z = a + b + c
+  hexcolor = z.upper()
+  #hexcolor = str(random.randint(0, 0xffffff))[1:]
   rgbcolor = tuple(int(hexcolor[i:i+2], 16) for i in (0, 2, 4))
-  print(">> rgb: " + str(rgbcolor) + " / hex: " + hexcolor)
+  print(">> rgb: " + str(rgbcolor) + " / hex: " + "#" + hexcolor)
   
 @client.command(pass_context=True)
 async def help(ctx):
