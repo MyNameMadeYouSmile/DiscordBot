@@ -30,10 +30,10 @@ cb = CleverBot()
 
 client.remove_command('help')
 
-async def chatbot(message):
+async def chatbot(ctx, message):
   await cb.init()
   response = await cb.getResponse(message)
-  return response
+  ctx.send(message.author.mention + " " + response)
   await cb.close()
 
 @client.event
@@ -72,7 +72,7 @@ async def on_message(message):
     
 @client.command(pass_context=True)
 async def chat(ctx, *, message):
-  ctx.send(message.author.mention + " " + asyncio.get_event_loop().run_until_complete(chatbot(message)))
+  asyncio.get_event_loop().run_until_complete(chatbot(ctx, message))
   
 @client.command(pass_context=True)
 async def help(ctx):
