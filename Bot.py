@@ -191,4 +191,8 @@ async def urban_error(error, ctx):
 async def love_error(error, ctx):
     return await error.send(error.message.author.mention + " Usage: !love [boy] [girl]")
   
+@chat.error
+async def chat_error(error, ctx):
+    return await error.send(error.message.author.mention + " Usage: !chat [message]")
+  
 client.run(os.environ['BOT_TOKEN'])
