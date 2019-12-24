@@ -33,8 +33,8 @@ client.remove_command('help')
 async def chatbot(ctx, message):
   await cb.init()
   response = await cb.getResponse(message)
-  ctx.send(ctx.message.author.mention + " " + response)
   await cb.close()
+  await ctx.send(ctx.message.author.mention + " " + response)
 
 @client.event
 async def on_ready():
