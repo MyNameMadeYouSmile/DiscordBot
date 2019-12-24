@@ -67,8 +67,11 @@ async def on_member_remove(member):
 @client.event
 async def on_message(message):
   if message.content.startswith("!"):
-    print(">> " + message.author.name + ": " + message.content)
-    await client.process_commands(message)
+    if "!chat" not in message.content:
+      print(">> " + message.author.name + ": " + message.content)
+      await client.process_commands(message)
+    else:
+      await client.process_commands(message)
     
 @client.command(pass_context=True)
 async def chat(ctx, *, message):
