@@ -20,7 +20,7 @@ class CleverBot:
         if not available, must be called just one time, until close()
         is called.
         """
-        self.browser = await pyp.launcher.launch()
+        self.browser = await pyp.launcher.launch(headless=True, ignoreHTTPSErrors=True, args=['--no-sandbox'])
         self.page = await self.browser.newPage()
         await self.page.goto("https://www.cleverbot.com") 
         self.element =  await self.page.querySelector("input.stimulus")
