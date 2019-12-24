@@ -27,13 +27,13 @@ reddit = praw.Reddit(client_id=os.environ['14_chars'], \
                      password=os.environ['reddit_p'])
 
 cb = CleverBot()
+goingOn = True
 
 client.remove_command('help')
 
 async def chatterbot(ctx, message):
   await cb.init()
-  goingOn = True
-  while(goingOn = True):
+  while(goingOne):
     message.lower().find("end") != -1:
       break
     response = await cb.getResponse(message)
