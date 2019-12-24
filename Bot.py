@@ -99,15 +99,11 @@ async def randomcolor(ctx):
   green = rgbcolor[1]
   blue = rgbcolor[2]
   
-  print(">> RGB: " + str(rgbcolor) + " / HEX: " + "#" + hexcolor)
-  try:
-    newhex = "0x" + hexcolor
-    embed=discord.Embed(title="Generated New Color For " + ctx.message.author.name, color=int(newhex, 16))
-    embed.add_field(name="RGB Color", value=str(rgbcolor), inline=True)
-    embed.add_field(name="Hex Color", value="#" + hexcolor, inline=True)
-    await ctx.send(embed=embed)
-  except Exception as e:
-    print(e)
+  newhex = "0x" + hexcolor
+  embed=discord.Embed(title="Generated New Color For " + ctx.message.author.name, color=int(newhex, 16))
+  embed.add_field(name="RGB Color", value=str(rgbcolor), inline=True)
+  embed.add_field(name="Hex Color", value="#" + hexcolor, inline=True)
+  await ctx.send(embed=embed)
   
 @client.command(pass_context=True)
 async def help(ctx):
