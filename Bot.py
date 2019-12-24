@@ -97,7 +97,9 @@ async def commands(ctx):
 
 !searchgwa - Search for posts in gonewildaudio (5 posts per request).
 
-!love - Calculate the possibility of two users loving eachother.```""")
+!love - Calculate the possibility of two users loving eachother.
+
+!chat - Chat with an AI bot.```""")
   
 @client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
