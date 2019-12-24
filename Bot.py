@@ -142,7 +142,6 @@ async def searchgwa(ctx, *, searchterm):
   if str(ctx.message.channel) != "Direct Message with " + str(ctx.message.author):
     await ctx.send("Please PM me to use the !searchgwa command. Let's keep the server clean.")
   else:
-    print(str(ctx.message.channel))
     resultnum = 1
     for searchgwa in reddit.subreddit('gonewildaudio').search(searchterm, limit=5):
       if len(searchgwa.title) > 256:
