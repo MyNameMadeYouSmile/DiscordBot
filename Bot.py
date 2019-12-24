@@ -15,8 +15,6 @@ import datetime
 import asyncio
 import mycleverbot
 from mycleverbot import CleverBot
-from PIL import Image
-from PIL import ImageDraw
 
 Client = discord.Client()
 bot_prefix= "!"
