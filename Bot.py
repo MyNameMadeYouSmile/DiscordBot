@@ -102,8 +102,7 @@ async def randcol(ctx):
   print(">> RGB: " + str(rgbcolor) + " / HEX: " + "#" + hexcolor)
   try:
     newhex = "0x" + hexcolor
-    embed=discord.Embed(title="Generated New Color", color=int(newhex, 16))
-    embed.set_author(name=ctx.message.author.name)
+    embed=discord.Embed(title="Generated New Color For " + ctx.message.author.name, color=int(newhex, 16))
     embed.add_field(name="RGB Color", value=str(rgbcolor), inline=True)
     embed.add_field(name="Hex Color", value="#" + hexcolor, inline=True)
     await ctx.send(embed=embed)
