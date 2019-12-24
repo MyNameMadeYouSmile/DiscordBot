@@ -34,7 +34,7 @@ client.remove_command('help')
 async def chatterbot(ctx, message):
   await cb.init()
   while(goingOne):
-    message.lower().find("end") != -1:
+    if message.lower().find("end") != -1:
       break
     response = await cb.getResponse(message)
     await ctx.send(ctx.message.author.mention + " " + response)
