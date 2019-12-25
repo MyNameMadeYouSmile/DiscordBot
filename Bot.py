@@ -110,7 +110,7 @@ async def chat(ctx):
   asyncio.get_event_loop().run_until_complete(chatbot(ctx))
   
 @client.command(pass_context=True)
-async def 8ball(ctx, *, question):
+async def ball(ctx, *, question):
   await ctx.send(random.choice(magicResponses))
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
@@ -164,7 +164,9 @@ async def commands(ctx):
 
 !chat - Chat with an intelligent robot.
 
-!randomcolor - Generate random RGB & HEX color. Command aliases: !randcol, !rc```""")
+!randomcolor - Generate random RGB & HEX color. Command aliases: !randcol, !rc
+
+!ball - Ask magic 8ball a question.```""")
   
 @client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
