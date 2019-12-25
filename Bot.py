@@ -206,7 +206,7 @@ Swedish - sv  | Chech - cz   | Portuguese - pt```""")
     
 @client.command(pass_context=True)
 async def urban(ctx, *, term):
-  if str(ctx.message.channel) != "bot-playground" 
+  if str(ctx.message.channel) != "bot-playground":
     if str(ctx.message.channel) == "testing-bot":
       asyncio.get_event_loop().run_until_complete(urbangen(ctx, term))
     else:
