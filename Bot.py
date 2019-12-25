@@ -116,7 +116,7 @@ async def _8ball(ctx, *, question):
   
 @client.command(pass_context=True)
 async def calc(ctx, *, calculation):
-  await ctx.send(Calc.evaluate(calculation))
+  await ctx.send("Math Result: " + Calc.evaluate(calculation))
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
