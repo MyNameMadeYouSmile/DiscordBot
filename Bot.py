@@ -153,7 +153,7 @@ async def commands(ctx):
 
 !love - Calculate the possibility of two users loving eachother.
 
-!chat - Chat with an AI bot.
+!chat - Chat with an intelligent robot.
 
 !randomcolor - Generate random RGB & HEX color. Command aliases: !randcol, !rc```""")
   
