@@ -15,6 +15,7 @@ import datetime
 import asyncio
 import mycleverbot
 from mycleverbot import CleverBot
+from calculator import Calc
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -112,6 +113,10 @@ async def chat(ctx):
 @client.command(pass_context=True, name="8ball")
 async def _8ball(ctx, *, question):
   await ctx.send(random.choice(magicResponses))
+  
+@client.command(pass_context=True)
+async def calc(ctx, *, calculation):
+  await ctx.send(Calc.evaluate(calculation))
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
