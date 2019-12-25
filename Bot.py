@@ -44,6 +44,7 @@ async def chatterbot(ctx):
     except asyncio.TimeoutError:
       await ctx.send('You took too long... closing our chat session.')
       await cb.close()
+      chatterbotter = False
     else:
       text = msg.content
       if text.lower().find("end") != -1:
