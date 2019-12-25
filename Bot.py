@@ -27,7 +27,7 @@ reddit = praw.Reddit(client_id=os.environ['14_chars'], \
                      password=os.environ['reddit_p'])
 
 cb = CleverBot()
-chatterbotter = True
+chatterbotter = False
 
 client.remove_command('help')
 
@@ -35,22 +35,28 @@ async def chatterbot(ctx):
   def pred(m):
     return m.author == ctx.message.author and m.channel == ctx.message.channel
   
+  chatterbotter = True
   await cb.init()
+  await ctx.send(ctx.message.author.mention + " I opened our chatting session, let's talk now :)")
   
   while chatterbotter == True:
-    await ctx.send(ctx.message.author.mention + " I opened our chatting session. Talk to me!")
     try:
-      msg = await client.wait_for('message', check=pred, timeout=120.0)
+      msg = await client.wait_for('message', check=pred, timeout=60.0)
     except asyncio.TimeoutError:
       await ctx.send('You took too long... closing our chat session.')
       await cb.close()
       chatterbotter = False
     else:
-      text = msg.content
-      if text.lower().find("end") != -1:
-        break
-      response = await cb.getResponse(text)
-      await ctx.send(ctx.message.author.mention + " " + response)
+      if msg.content == "!stop":
+        await ctx.send('It was nice talking to you... closing our chat session.')
+        await cb.close()
+        chatterbotter = False
+      else:
+        text = msg.content
+        if text.lower().find("end") != -1:
+          break
+        response = await cb.getResponse(text)
+        await ctx.send(ctx.message.author.mention + " " + response)
 
 async def chatbot(ctx, message):
   await cb.init()
