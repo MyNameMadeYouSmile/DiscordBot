@@ -27,8 +27,29 @@ reddit = praw.Reddit(client_id=os.environ['14_chars'], \
                      password=os.environ['reddit_p'])
 
 cb = CleverBot()
+chatterbotter = True
 
 client.remove_command('help')
+
+async def chatterbot(ctx):
+  def pred(m):
+    return m.author == ctx.message.author and m.channel == ctx.message.channel
+  
+  await cb.init()
+  
+  while chatterbotter == True:
+    await ctx.send(ctx.message.author.mention + " I opened our chatting session. Talk to me!")
+    try:
+      msg = await ctx.wait_for('message', check=pred, timeout=120.0)
+    except asyncio.TimeoutError:
+      await ctx.send('You took too long... closing our chat session.')
+      await cb.close()
+    else:
+      text = msg.content
+      if text.lower().find("end") != -1:
+        break
+      response = await cb.getResponse(text)
+      await ctx.send(ctx.message.author.mention + " " + response)
 
 async def chatbot(ctx, message):
   await cb.init()
@@ -76,6 +97,10 @@ async def on_message(message):
 @client.command(pass_context=True)
 async def chat(ctx, *, message):
   asyncio.get_event_loop().run_until_complete(chatbot(ctx, str(message)))
+  
+@client.command(pass_context=True)
+async def chatter(ctx):
+  asyncio.get_event_loop().run_until_complete(chatterbot(ctx))
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
