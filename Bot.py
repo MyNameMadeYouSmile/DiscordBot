@@ -193,7 +193,7 @@ Swedish - sv  | Chech - cz   | Portuguese - pt```""")
     
 @client.command(pass_context=True)
 async def urban(ctx, *, term):
-  if str(ctx.message.channel) != "bot-playground":
+  if str(ctx.message.channel) != "bot-playground" or str(ctx.message.channel) != "testing-bot":
     bot_channel = client.get_channel(657209517288718366)
     await ctx.send("Go to the " + bot_channel.mention + " channel to use the !urban command. Let's keep this channel clean.")
   else:
