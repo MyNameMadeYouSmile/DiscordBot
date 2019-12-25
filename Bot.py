@@ -171,7 +171,9 @@ async def commands(ctx):
 
 !randomcolor - Generate random RGB & HEX color. Command aliases: !randcol, !rc
 
-!8ball - Ask magic 8ball a question.```""")
+!8ball - Ask magic 8ball a question.
+
+!calc - Use a calculator.```""")
   
 @client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
