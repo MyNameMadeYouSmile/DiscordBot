@@ -31,7 +31,7 @@ chatterbotter = False
 
 client.remove_command('help')
 
-async def chatterbot(ctx):
+async def chatbot(ctx):
   def pred(m):
     return m.author == ctx.message.author and m.channel == ctx.message.channel
   
@@ -59,12 +59,6 @@ async def chatterbot(ctx):
           break
         response = await cb.getResponse(text)
         await ctx.send(ctx.message.author.mention + " " + response)
-
-async def chatbot(ctx, message):
-  await cb.init()
-  response = await cb.getResponse(message)
-  await cb.close()
-  await ctx.send(ctx.message.author.mention + " " + response)
 
 @client.event
 async def on_ready():
@@ -105,13 +99,9 @@ async def on_message(message):
       await client.process_commands(message)
     else:
       await client.process_commands(message)
-    
-@client.command(pass_context=True)
-async def chat(ctx, *, message):
-  asyncio.get_event_loop().run_until_complete(chatbot(ctx, str(message)))
   
 @client.command(pass_context=True)
-async def chatter(ctx):
+async def chat(ctx):
   asyncio.get_event_loop().run_until_complete(chatterbot(ctx))
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
