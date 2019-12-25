@@ -51,6 +51,8 @@ async def chatterbot(ctx):
         await ctx.send('It was nice talking to you... closing our chat session.')
         await cb.close()
         chatterbotter = False
+      elif msg.content.startswith("!") and msg.content != "!stop":
+        pass
       else:
         text = msg.content
         if text.lower().find("end") != -1:
@@ -74,7 +76,10 @@ async def on_ready():
 @client.event
 async def on_command_error(ctx, error):
   if isinstance(error, CommandNotFound):
-    return await ctx.send(str(error))
+    if str(error) == 'Command "stop" is not found':
+      pass
+    else:
+      return await ctx.send(str(error))
   
 @client.event
 async def on_member_join(member):
