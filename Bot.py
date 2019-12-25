@@ -102,7 +102,7 @@ async def on_message(message):
   
 @client.command(pass_context=True)
 async def chat(ctx):
-  asyncio.get_event_loop().run_until_complete(chatterbot(ctx))
+  asyncio.get_event_loop().run_until_complete(chatbot(ctx))
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
