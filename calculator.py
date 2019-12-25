@@ -5,7 +5,7 @@ _OP_MAP = {
     ast.Add: operator.add,
     ast.Sub: operator.sub,
     ast.Mult: operator.mul,
-    ast.Div: operator.div,
+    ast.Div: operator.truediv,
     ast.Invert: operator.neg,
 }
 
