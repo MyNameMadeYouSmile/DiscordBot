@@ -37,6 +37,19 @@ magicResponses = ['As I see it, yes.', 'Ask again later.', 'Better not tell you 
 
 client.remove_command('help')
 
+async def urbangen(ctx, term):
+  try:
+    url = 'http://api.urbandictionary.com/v0/define?term=%s' % (term)
+    res = urllib.request.urlopen(url) 
+    data = json.loads(res.read().decode('utf-8'))
+    definition = data['list'][0]['definition']
+    await ctx.send(definition)
+  except IndexError:
+    print("index error")
+    await ctx.send('There\'s no definition for this word.')
+  except urllib.error.URLError:
+    pass
+
 async def chatbot(ctx):
   def pred(m):
     return m.author == ctx.message.author and m.channel == ctx.message.channel
@@ -193,21 +206,14 @@ Swedish - sv  | Chech - cz   | Portuguese - pt```""")
     
 @client.command(pass_context=True)
 async def urban(ctx, *, term):
-  if str(ctx.message.channel) != "bot-playground" or str(ctx.message.channel) != "testing-bot":
-    bot_channel = client.get_channel(657209517288718366)
-    await ctx.send("Go to the " + bot_channel.mention + " channel to use the !urban command. Let's keep this channel clean.")
+  if str(ctx.message.channel) != "bot-playground" 
+    if str(ctx.message.channel) == "testing-bot":
+      asyncio.get_event_loop().run_until_complete(urbangen(ctx, term))
+    else:
+      bot_channel = client.get_channel(657209517288718366)
+      await ctx.send("Go to the " + bot_channel.mention + " channel to use the !urban command. Let's keep this channel clean.")
   else:
-    try:
-      url = 'http://api.urbandictionary.com/v0/define?term=%s' % (term)
-      res = urllib.request.urlopen(url) 
-      data = json.loads(res.read().decode('utf-8'))
-      definition = data['list'][0]['definition']
-      await ctx.send(definition)
-    except IndexError:
-      print("index error")
-      await ctx.send('There\'s no definition for this word.')
-    except urllib.error.URLError:
-      pass
+    asyncio.get_event_loop().run_until_complete(urbangen(ctx, term))
   
 @client.command(pass_context=True)
 async def love(ctx, pupil1, pupil2):
