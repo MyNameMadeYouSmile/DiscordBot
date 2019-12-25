@@ -252,18 +252,26 @@ async def searchgwa(ctx, *, searchterm):
     
 @translate.error
 async def translate_error(error, ctx):
-    return await error.send(error.message.author.mention + " Usage: !translate [from lang code] [to lang code] [sentence]")
+  return await error.send(error.message.author.mention + " Usage: !translate [from lang code] [to lang code] [sentence]")
  
 @searchgwa.error
 async def searchgwa_error(error, ctx):
-    return await error.send(error.message.author.mention + " Usage: !searchgwa [type what you're looking for]")
+  return await error.send(error.message.author.mention + " Usage: !searchgwa [type what you're looking for]")
   
 @urban.error
 async def urban_error(error, ctx):
-    return await error.send(error.message.author.mention + " Usage: !urban [term]")
+  return await error.send(error.message.author.mention + " Usage: !urban [term]")
+  
+@calc.error
+async def calc_error(error, ctx):
+  return await error.send(error.message.author.mention + " Example: !calc 2 + 2 - (2 * 6)")
+  
+@_8ball.error
+async def _8ball_error(error, ctx):
+  return await error.send(error.message.author.mention + " Usage: !8ball [Your question]")
   
 @love.error
 async def love_error(error, ctx):
-    return await error.send(error.message.author.mention + " Usage: !love [boy] [girl]")
+  return await error.send(error.message.author.mention + " Usage: !love [boy] [girl]")
   
 client.run(os.environ['BOT_TOKEN'])
