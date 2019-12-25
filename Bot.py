@@ -40,7 +40,7 @@ async def chatterbot(ctx):
   while chatterbotter == True:
     await ctx.send(ctx.message.author.mention + " I opened our chatting session. Talk to me!")
     try:
-      msg = await ctx.wait_for('message', check=pred, timeout=120.0)
+      msg = await client.wait_for('message', check=pred, timeout=120.0)
     except asyncio.TimeoutError:
       await ctx.send('You took too long... closing our chat session.')
       await cb.close()
