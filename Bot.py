@@ -173,8 +173,7 @@ async def help(ctx):
   
 @client.command(pass_context=True)
 async def commands(ctx):
-  embed=discord.Embed(title="The Naughty Bot Commands", description="!help - Bot help.\n\n!commands - Request for list of all commands.\n\n!translate - Translate a word or sentence from one language to another.\n\n!urban - Request a definition for a term from urban dictionary.\n\n!searchgwa - Search for posts in gonewildaudio (5 posts per request).\n\n!love - Calculate the possibility of two users loving eachother.\n\n!chat - Chat with an intelligent robot.\n\n!randomcolor - Generate random RGB & HEX color. Command aliases: !randcol, !rc\n\n!8ball - Ask magic 8ball a question.\n\n!calc - Use a calculator.\n\n!quote - Get a random quote.", color=0x707a08)
-  embed.set_author(name="Naughty Bot", icon_url="https://c7.uihere.com/files/949/146/517/computer-icons-discord-emoticon-avatar-clip-art-discord-logo-thumb.jpg")
+  embed=discord.Embed(title="        The Naughty Bot Commands", description="!help - Bot help.\n\n!commands - Request for list of all commands.\n\n!translate - Translate a word or sentence from one language to another.\n\n!urban - Request a definition for a term from urban dictionary.\n\n!searchgwa - Search for posts in gonewildaudio (5 posts per request).\n\n!love - Calculate the possibility of two users loving eachother.\n\n!chat - Chat with an intelligent robot.\n\n!randomcolor - Generate random RGB & HEX color. Command aliases: !randcol, !rc\n\n!8ball - Ask magic 8ball a question.\n\n!calc - Use a calculator.\n\n!quote - Get a random quote.", color=0x707a08)
   
   await ctx.send(embed=embed)
   
