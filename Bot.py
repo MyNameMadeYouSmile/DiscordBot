@@ -133,7 +133,9 @@ async def calc(ctx, *, calculation):
   
 @client.command(pass_context=True)
 async def quote(ctx):
-  r=requests.get("https://api.forismatic.com/api/1.0/?\method=getQuote&lang=en&format=jsonp&jsonp=?")
+  r=requests.get("https://api.forismatic.com/api/1.0/?\
+                        method=getQuote&lang=en&format=jsonp&jsonp=?")
+  print(r.status_code)
   print(r.content)
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
