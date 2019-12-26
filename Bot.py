@@ -133,10 +133,13 @@ async def calc(ctx, *, calculation):
   
 @client.command(pass_context=True)
 async def quote(ctx):
-  r=requests.get("https://api.forismatic.com/api/1.0/?\
-                        method=getQuote&lang=en&format=jsonp&jsonp=?")
-  print(r.status_code)
-  print(r.content)
+  r=requests.get("https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en")
+  quote_dict = json.loads(r.content)
+  theQuote = quote_dict['quoteText']
+  theAuthor = quote_dict['quoteAuthor']
+  ctx.send('"' + theQuote + '"\n\n~ ' + theAuthor + '.')
+  #print(r.status_code)
+  #print(r.content)
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
