@@ -141,7 +141,8 @@ async def quote(ctx):
   
 @client.command(pass_context=True)
 async def cat(ctx):
-  embed=discord.Embed(title=":cat: Meowwww..", url="https://api.thecatapi.com/api/images/get?format=src&results_per_page=1")
+  embed=discord.Embed(title=":cat: Meowww..", url="https://api.thecatapi.com/api/images/get?format=src&results_per_page=1")
+  embed.set_image(url="https://api.thecatapi.com/api/images/get?format=src&results_per_page=1")
   await ctx.send(embed=embed)
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
