@@ -208,13 +208,13 @@ Swedish - sv  | Chech - cz   | Portuguese - pt```""")
 async def urban(ctx, *, term):
   if str(ctx.message.channel) != "bot-playground":
     if str(ctx.message.channel) == "testing-bot":
-      urbangen(ctx, term)
+      await urbangen(ctx, term)
       #asyncio.get_event_loop().run_until_complete(urbangen(ctx, term))
     else:
       bot_channel = client.get_channel(657209517288718366)
       await ctx.send("Go to the " + bot_channel.mention + " channel to use the !urban command. Let's keep this channel clean.")
   else:
-    urbangen(ctx, term)
+    await urbangen(ctx, term)
     #asyncio.get_event_loop().run_until_complete(urbangen(ctx, term))
   
 @client.command(pass_context=True)
