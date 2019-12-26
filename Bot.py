@@ -188,6 +188,7 @@ async def randomcolor(ctx):
   
   newhex = "0x" + hexcolor
   embed=discord.Embed(title="Generated New Color For " + ctx.message.author.name, color=int(newhex, 16))
+  embed.set_image(url="https://color.dyno.gg/color/{}/80x80.png".format(hexcolor))
   embed.add_field(name="RGB Color", value=str(rgbcolor), inline=True)
   embed.add_field(name="Hex Color", value="#" + hexcolor, inline=True)
   await ctx.send(embed=embed)
