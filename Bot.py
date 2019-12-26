@@ -137,7 +137,7 @@ async def quote(ctx):
   quote_dict = json.loads(r.content)
   theQuote = quote_dict['quoteText']
   theAuthor = quote_dict['quoteAuthor']
-  await ctx.send('"' + theQuote + '"\n\n~ ' + theAuthor + '.')
+  await ctx.send('"' + theQuote + '"\n\n~ ' + theAuthor)
   print(r.content)
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
@@ -195,7 +195,9 @@ async def commands(ctx):
 
 !8ball - Ask magic 8ball a question.
 
-!calc - Use a calculator.```""")
+!calc - Use a calculator.
+
+!quote - Get a random quote.```""")
   
 @client.command(pass_context=True)
 async def translate(ctx, From, To, *, sentence):
