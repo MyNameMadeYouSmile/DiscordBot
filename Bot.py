@@ -137,9 +137,8 @@ async def quote(ctx):
   quote_dict = json.loads(r.content)
   theQuote = quote_dict['quoteText']
   theAuthor = quote_dict['quoteAuthor']
-  ctx.send('"' + theQuote + '"\n\n~ ' + theAuthor + '.')
-  #print(r.status_code)
-  #print(r.content)
+  await ctx.send('"' + theQuote + '"\n\n~ ' + theAuthor + '.')
+  print(r.content)
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
