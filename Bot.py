@@ -157,8 +157,11 @@ async def cat(ctx):
   
 @client.command(pass_context=True)
 async def bird(ctx):
-  embed=discord.Embed(title=":bird: Tweet tweet..", url="https://random.birb.pw/tweet/random")
-  embed.set_image(url="https://random.birb.pw/tweet/random")
+  r = requests.get("http://random.birb.pw/tweet.json/")
+  bird_dict = json.loads(r.content)
+  theBird = bird_dict['file']
+  embed=discord.Embed(title=":bird: Tweet tweet..", url="https://random.birb.pw/img/" + theBird)
+  embed.set_image(url="https://random.birb.pw/img/" + theBird)
   await ctx.send(embed=embed)
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
