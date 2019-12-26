@@ -131,6 +131,11 @@ async def _8ball(ctx, *, question):
 async def calc(ctx, *, calculation):
   await ctx.send("Math Result: " + Calc.evaluate(calculation))
   
+@client.command(pass_context=True)
+async def quote(ctx):
+  r=requests.get("https://api.forismatic.com/api/1.0/?\method=getQuote&lang=en&format=jsonp&jsonp=?")
+  print(r.content)
+  
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
   a = hex(random.randrange(0,256))
