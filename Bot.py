@@ -139,6 +139,11 @@ async def quote(ctx):
   theAuthor = quote_dict['quoteAuthor']
   await ctx.send('"' + theQuote + '"\n\n~ ' + theAuthor)
   
+@client.command(pass_context=True)
+async def cat(ctx):
+  embed=discord.Embed(title=":cat: Meowwww..", url="https://api.thecatapi.com/api/images/get?format=src&results_per_page=1")
+  await ctx.send(embed=embed)
+  
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
   a = hex(random.randrange(0,256))
