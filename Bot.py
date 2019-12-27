@@ -203,7 +203,7 @@ async def bank(ctx, user):
     data = json.load(json_file)
     try:
       user_money = data[user]
-      embed=discord.Embed(title=str("Bank Status", color=0x866f0f)
+      embed=discord.Embed(title="Bank Status", color=0x866f0f)
       embed.add_field(name="Money Amount", value="$ " + user_money)
   
       await ctx.send(embed=embed)
