@@ -191,7 +191,7 @@ async def money(ctx):
       new_user = {str(ctx.message.author):"0"}
       data.append(new_user)
       embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
-      embed.add_field(name="Money Amount", value="$ " + user_money)
+      embed.add_field(name="Money Amount", value="$ 0")
       await ctx.send(embed=embed)
     else:
       embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
