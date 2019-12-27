@@ -185,7 +185,7 @@ async def removebg(ctx, imgUrl):
       
 @client.command(pass_context=True)
 async def money(ctx):
-  dbServer = 'http://db4free.net'
+  dbServer = 'www.db4free.net'
   dbUser = 'discordbot'
   dbPass = os.environ['db_password']
   dbName = 'discord_bank'
@@ -201,6 +201,7 @@ async def money(ctx):
     for row in cur:
       embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
       embed.add_field(name="Money Amount", value="$ " + row[0])
+      await ctx.send(embed=embed)
       #await ctx.send("""```Username: {}\nEmail: {}\nIP: {}```""".format(row[0], member, row[1]))
   conn.close()
   
