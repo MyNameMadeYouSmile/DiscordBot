@@ -184,13 +184,15 @@ async def removebg(ctx, imgUrl):
       
 @client.command(pass_context=True)
 async def money(ctx):
-  bank_db = json.loads("bank/BankData.json")
-  user_money = bank_db[str(ctx.message.author)]
+  with open('bank/BankData.json') as json_file:
+    data = json.load(json_file)
+    user_money = data[str(ctx.message.author)]
   
-  embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
-  embed.add_field(name="Money Amount", value=user_money + " :heavy_dollar_sign:")
+    embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
+    embed.add_field(name="Money Amount", value="$ " + user_money)
   
-  await ctx.send(embed=embed)
+    await ctx.send(embed=embed)
+  json_file.close()
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
