@@ -199,7 +199,7 @@ async def money(ctx):
     sql2 = "INSERT INTO users(username,money) " \
             "VALUES(%s,%s)"
     args = (str(ctx.message.author), "0")
-    cur.execute(sql2 % args)
+    cur.execute(sql2, args)
     embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
     embed.add_field(name="Money Amount", value="$ 0")
     
