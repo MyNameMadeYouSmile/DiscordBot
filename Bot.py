@@ -188,7 +188,7 @@ async def money(ctx):
     data = json.load(json_file)
     user_money = data[str(ctx.message.author)]
     if user_money == None:
-      await ctx.send("You don't have a bank account yet {}, create one!".format(str(ctx.message.author.display_name))
+      await ctx.send("You don't have a bank account yet {}, create one!".format(str(ctx.message.author.display_name)))
     else:
       embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
       embed.add_field(name="Money Amount", value="$ " + user_money)
