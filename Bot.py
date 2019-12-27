@@ -187,11 +187,17 @@ async def money(ctx):
   with open('bank/BankData.json') as json_file:
     data = json.load(json_file)
     user_money = data[str(ctx.message.author)]
+    if user_money == None:
+      new_user = {str(ctx.message.author):"0"}
+      data.append(new_user)
+      embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
+      embed.add_field(name="Money Amount", value="$ " + user_money)
+      await ctx.send(embed=embed)
+    else:
+      embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
+      embed.add_field(name="Money Amount", value="$ " + user_money)
   
-    embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
-    embed.add_field(name="Money Amount", value="$ " + user_money)
-  
-    await ctx.send(embed=embed)
+      await ctx.send(embed=embed)
   json_file.close()
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
