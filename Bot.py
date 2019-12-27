@@ -16,6 +16,7 @@ import asyncio
 import mycleverbot
 from mycleverbot import CleverBot
 from calculator import Calc
+from PIL import ImageDraw
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -164,6 +165,23 @@ async def bird(ctx):
   embed.set_image(url="https://random.birb.pw/img/" + theBird)
   await ctx.send(embed=embed)
   
+@client.command(pass_context=True, aliases=['rb'])
+async def removebg(ctx, imgUrl):
+  urllib.request.urlretrieve(imgUrl, "remove-new-bg.png")
+  
+  response = requests.post(
+    'https://api.remove.bg/v1.0/removebg',
+    files={'image_file': open('remove-new-bg.png', 'rb')},
+    data={'size': 'auto'},
+    headers={'X-Api-Key': os.environ['apiKey']},
+  )
+  if response.status_code == requests.codes.ok:
+    with open('new-removed-bg.png', 'wb') as out:
+      out.write(response.content)
+      await ctx.send(file=discord.File('new-removed-bg.png'))
+  else:
+      print("Error:", response.status_code, response.text)
+  
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
   a = hex(random.randrange(0,256))
@@ -199,7 +217,7 @@ async def help(ctx):
   
 @client.command(pass_context=True)
 async def commands(ctx):
-  embed=discord.Embed(title="-----------Naughty Bot Commands---------", description="!help - Bot help.\n\n!commands - Request for list of all commands.\n\n!translate - Translate a word or sentence from one language to another.\n\n!urban - Request a definition for a term from urban dictionary.\n\n!searchgwa - Search for posts in gonewildaudio (5 posts per request).\n\n!love - Calculate the possibility of two users loving eachother.\n\n!chat - Chat with an intelligent robot.\n\n!randomcolor - Generate random RGB & HEX color. Command aliases: !randcol, !rc\n\n!8ball - Ask magic 8ball a question.\n\n!calc - Use a calculator.\n\n!quote - Get a random quote.\n\n!cat - Request a cute cat picture.\n\n!dog - Request a cute dog picture.\n\n!bird - Request a random adorable bird picture.", color=0x707a08)
+  embed=discord.Embed(title="-----------Naughty Bot Commands---------", description="!help - Bot help.\n\n!commands - Request for list of all commands.\n\n!translate - Translate a word or sentence from one language to another.\n\n!urban - Request a definition for a term from urban dictionary.\n\n!searchgwa - Search for posts in gonewildaudio (5 posts per request).\n\n!love - Calculate the possibility of two users loving eachother.\n\n!chat - Chat with an intelligent robot.\n\n!randomcolor - Generate random RGB & HEX color. Command aliases: !randcol, !rc\n\n!8ball - Ask magic 8ball a question.\n\n!calc - Use a calculator.\n\n!quote - Get a random quote.\n\n!cat - Request a cute cat picture.\n\n!dog - Request a cute dog picture.\n\n!bird - Request a random adorable bird picture.\n\n!removebg - Remove background from an image. Alias: !rb", color=0x707a08)
   
   await ctx.send(embed=embed)
   
@@ -317,5 +335,9 @@ async def _8ball_error(error, ctx):
 @love.error
 async def love_error(error, ctx):
   return await error.send(error.message.author.mention + " Usage: !love [boy] [girl]")
+
+@removebg.error
+async def removebg_error(error, ctx):
+  return await error.send(error.message.author.mention + " Usage: !removebg [image url]")
   
 client.run(os.environ['BOT_TOKEN'])
