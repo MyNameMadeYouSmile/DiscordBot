@@ -196,6 +196,21 @@ async def money(ctx):
       print(e)
       await ctx.send("You don't have a bank account yet {}, create one!".format(str(ctx.message.author.display_name)))
     json_file.close()
+    
+@client.command(pass_context=True)
+async def bank(ctx, user):
+  with open('bank/BankData.json') as json_file:
+    data = json.load(json_file)
+    try:
+      user_money = data[user]
+      embed=discord.Embed(title=str("Bank Status", color=0x866f0f)
+      embed.add_field(name="Money Amount", value="$ " + user_money)
+  
+      await ctx.send(embed=embed)
+    except Exception as e:
+      print(e)
+      await ctx.send("You don't have a bank account yet {}, create one!".format(str(ctx.message.author.display_name)))
+    json_file.close()
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
