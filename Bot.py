@@ -17,6 +17,7 @@ import mycleverbot
 from mycleverbot import CleverBot
 from calculator import Calc
 from PIL import ImageDraw
+import pymysql
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -184,18 +185,37 @@ async def removebg(ctx, imgUrl):
       
 @client.command(pass_context=True)
 async def money(ctx):
-  with open('bank/BankData.json') as json_file:
-    data = json.load(json_file)
-    try:
-      user_money = data[str(ctx.message.author)]
-      embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
-      embed.add_field(name="Money Amount", value="$ " + user_money)
+  dbServer = 'http://db4free.net'
+  dbUser = 'discordbot'
+  dbPass = os.environ['db_password']
+  dbName = 'discord_bank'
   
-      await ctx.send(embed=embed)
-    except Exception as e:
-      print(e)
-      await ctx.send("You don't have a bank account yet {}, create one!".format(str(ctx.message.author.display_name)))
-    json_file.close()
+  conn = pymysql.connect(host=dbServer, user=dbUser, passwd=dbPass, db=dbName)
+  cur = conn.cursor()
+  sql = "SELECT money FROM users WHERE username ='%s'"
+  cur.execute(sql % str(ctx.message.author))
+  row_count = cur.rowcount
+  if row_count == 0:
+    await ctx.send("You don't have a bank account yet {}, create one!".format(str(ctx.message.author.display_name)))
+  else:
+    for row in cur:
+      embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
+      embed.add_field(name="Money Amount", value="$ " + row[0])
+      #await ctx.send("""```Username: {}\nEmail: {}\nIP: {}```""".format(row[0], member, row[1]))
+  conn.close()
+  
+  #with open('bank/BankData.json') as json_file:
+   # data = json.load(json_file)
+    #try:
+     # user_money = data[str(ctx.message.author)]
+      #embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
+      #embed.add_field(name="Money Amount", value="$ " + user_money)
+  
+      #await ctx.send(embed=embed)
+    #except Exception as e:
+     # print(e)
+      #await ctx.send("You don't have a bank account yet {}, create one!".format(str(ctx.message.author.display_name)))
+    #json_file.close()
     
 @client.command(pass_context=True)
 async def bank(ctx, user):
