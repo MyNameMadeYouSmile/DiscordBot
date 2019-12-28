@@ -439,6 +439,6 @@ async def love_error(error, ctx):
 
 @removebg.error
 async def removebg_error(error, ctx):
-  return await error.send(error.message.author.mention + " Usage: !removebg [image url]")
+  return await error.send(error.message.author.mention + " Can't remove bg from your image or you forgot the image url. Usage: !removebg [image url]")
   
 client.run(os.environ['BOT_TOKEN'])
