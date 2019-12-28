@@ -54,7 +54,7 @@ async def urbangen(ctx, term):
   except urllib.error.URLError:
     pass
   
-async def insertMoney(wonMoney, user):
+async def insertMoney(ctx, prefiX, wonMoney, user):
   dbServer = 'remotemysql.com'
   dbUser = 'MPbzulZgmy'
   dbPass = os.environ['db_password']
@@ -74,6 +74,8 @@ async def insertMoney(wonMoney, user):
       conn.commit()
     except Exception as e:
       print(e)
+      
+    await ctx.send(ctx.message.author.mention + " " + prefiX + wonMoney + " dollars. Check your bank status.")
   else:
     for row in cur:
       user_money = row[0]
@@ -85,6 +87,8 @@ async def insertMoney(wonMoney, user):
       conn.commit()
     except Exception as e:
       print(e)
+      
+    await ctx.send(ctx.message.author.mention + " " + prefiX + wonMoney + " dollars. Check your bank status.")
       
   conn.close()
 
@@ -275,14 +279,14 @@ async def lottery(ctx):
     else:
       msgPrefix2 = 'You just won '
         
-    asyncio.get_event_loop().run_until_complete(insertMoney(doubleWonMoney, str(ctx.message.author)))
+    asyncio.get_event_loop().run_until_complete(insertMoney(ctx, msgPrefix2, doubleWonMoney, str(ctx.message.author)))
       
-    await ctx.send(ctx.message.author.mention + " " + msgPrefix2 + doubleWonMoney + " dollars. Check your bank status.")
+    #await ctx.send(ctx.message.author.mention + " " + msgPrefix2 + doubleWonMoney + " dollars. Check your bank status.")
       
   else:
-    asyncio.get_event_loop().run_until_complete(insertMoney(wonMoney, str(ctx.message.author)))
+    asyncio.get_event_loop().run_until_complete(insertMoney(ctx, msgPrefix, wonMoney, str(ctx.message.author)))
       
-    await ctx.send(ctx.message.author.mention + " " + msgPrefix + wonMoney + " dollars. Check your bank status.")
+    #await ctx.send(ctx.message.author.mention + " " + msgPrefix + wonMoney + " dollars. Check your bank status.")
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
