@@ -219,6 +219,38 @@ async def money(ctx):
       
   conn.close()
   
+@client.command(pass_context=True)
+async def bank(ctx, usern):
+  dbServer = 'remotemysql.com'
+  dbUser = 'MPbzulZgmy'
+  dbPass = os.environ['db_password']
+  dbName = 'MPbzulZgmy'
+  
+  conn = pymysql.connect(host=dbServer, user=dbUser, passwd=dbPass, db=dbName)
+  cur = conn.cursor()
+  sql = "SELECT money FROM users WHERE username ='%s'"
+  cur.execute(sql % usern)
+  row_count = cur.rowcount
+  if row_count == 0:
+    try:
+      sql2 = "INSERT INTO users(username,money) VALUES(%s,%s)"
+      args = (usern, "0")
+      cur.execute(sql2, args)
+    except Exception as e:
+      print(e)
+    embed=discord.Embed(title="Bank Status", color=0x866f0f)
+    embed.add_field(name="Money Amount", value="$ 0")
+    
+    await ctx.send(embed=embed)
+  else:
+    for row in cur:
+      embed=discord.Embed(title="Bank Status", color=0x866f0f)
+      embed.add_field(name="Money Amount", value="$ " + row[0])
+      
+      await ctx.send(embed=embed)
+      
+  conn.close()
+  
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
   a = hex(random.randrange(0,256))
