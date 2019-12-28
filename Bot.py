@@ -171,10 +171,7 @@ async def _8ball(ctx, *, question):
   
 @client.command(pass_context=True)
 async def calc(ctx, *, calculation):
-  try:
-    await ctx.send("Math Result: " + Calc.evaluate(calculation))
-  except Exception as e:
-    print(e)
+  await ctx.send("Math Result: " + str(Calc.evaluate(calculation)))
   
 @client.command(pass_context=True)
 async def quote(ctx):
