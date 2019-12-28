@@ -75,7 +75,7 @@ async def insertMoney(ctx, prefiX, wonMoney, user):
     except Exception as e:
       print(e)
       
-    await ctx.send(ctx.message.author.mention + " " + prefiX + wonMoney + " dollars. Check your bank status.")
+    await ctx.send(ctx.message.author.mention + " " + prefiX + wonMoney.strip('-') + " dollars. Check your bank status.")
   else:
     for row in cur:
       user_money = row[0]
@@ -88,7 +88,7 @@ async def insertMoney(ctx, prefiX, wonMoney, user):
     except Exception as e:
       print(e)
       
-    await ctx.send(ctx.message.author.mention + " " + prefiX + wonMoney + " dollars. Check your bank status.")
+    await ctx.send(ctx.message.author.mention + " " + prefiX + wonMoney.strip('-') + " dollars. Check your bank status.")
       
   conn.close()
 
@@ -280,13 +280,8 @@ async def lottery(ctx):
       msgPrefix2 = 'You just won '
         
     asyncio.get_event_loop().run_until_complete(insertMoney(ctx, msgPrefix2, doubleWonMoney, str(ctx.message.author)))
-      
-    #await ctx.send(ctx.message.author.mention + " " + msgPrefix2 + doubleWonMoney + " dollars. Check your bank status.")
-      
   else:
     asyncio.get_event_loop().run_until_complete(insertMoney(ctx, msgPrefix, wonMoney, str(ctx.message.author)))
-      
-    #await ctx.send(ctx.message.author.mention + " " + msgPrefix + wonMoney + " dollars. Check your bank status.")
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
