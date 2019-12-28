@@ -39,6 +39,8 @@ magicResponses = ['As I see it, yes.', 'Ask again later.', 'Better not tell you 
 
 client.remove_command('help')
 
+lotteryMoney = ['1000', '-500', '500', '10', '0', '10000', '-9999', '200', '150000']
+
 async def urbangen(ctx, term):
   try:
     url = 'http://api.urbandictionary.com/v0/define?term=%s' % (term)
@@ -51,6 +53,35 @@ async def urbangen(ctx, term):
     await ctx.send('There\'s no definition for this word.')
   except urllib.error.URLError:
     pass
+  
+async def insertMoney(wonMoney, user):
+  conn = pymysql.connect(host=dbServer, user=dbUser, passwd=dbPass, db=dbName)
+  cur = conn.cursor()
+  sql = "SELECT money FROM users WHERE username ='%s'"
+  cur.execute(sql % user)
+  row_count = cur.rowcount
+  if row_count == 0:
+    try:
+      sql2 = "INSERT INTO users (username, money) VALUES (%s, %s)"
+      args = (user, wonMoney)
+      cur.execute(sql2, args)
+      conn.commit()
+    except Exception as e:
+      print(e)
+  else:
+    for row in cur:
+      user_money = row[0]
+      newMoney = int(user_money) + int(wonMoney)
+    try:
+      
+      sql2 = "UPDATE users SET money=%s WHERE username=%s"
+      args = (str(newMoney), user)
+      cur.execute(sql2, args)
+      conn.commit()
+    except Exception as e:
+      print(e)
+      
+  conn.close()
 
 async def chatbot(ctx):
   def pred(m):
@@ -201,9 +232,10 @@ async def money(ctx):
   row_count = cur.rowcount
   if row_count == 0:
     try:
-      sql2 = "INSERT INTO users(username,money) VALUES(%s,%s)"
+      sql2 = "INSERT INTO users (username, money) VALUES (%s, %s)"
       args = (str(ctx.message.author), "0")
       cur.execute(sql2, args)
+      conn.commit()
     except Exception as e:
       print(e)
     embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
@@ -220,37 +252,36 @@ async def money(ctx):
   conn.close()
   
 @client.command(pass_context=True)
-async def bank(ctx, usern):
+async def lottery(ctx):
   dbServer = 'remotemysql.com'
   dbUser = 'MPbzulZgmy'
   dbPass = os.environ['db_password']
   dbName = 'MPbzulZgmy'
+  msgPrefix = ''
+  msgPrefix2 = ''
   
-  conn = pymysql.connect(host=dbServer, user=dbUser, passwd=dbPass, db=dbName)
-  cur = conn.cursor()
-  sql = "SELECT money FROM users WHERE username ='%s'"
-  cur.execute(sql % usern)
-  row_count = cur.rowcount
-  if row_count == 0:
-    try:
-      sql2 = "INSERT INTO users (username, money) VALUES (%s, %s)"
-      args = (usern, "1")
-      cur.execute(sql2, args)
-      conn.commit()
-    except Exception as e:
-      print(e)
-    embed=discord.Embed(title="Bank Status", color=0x866f0f)
-    embed.add_field(name="Money Amount", value="$ 0")
-    
-    await ctx.send(embed=embed)
+  wonMoney = random.choice(lotteryMoney)
+  
+  if wonMoney.startswith('-'):
+    msgPrefix = 'You just lost '
   else:
-    for row in cur:
-      embed=discord.Embed(title="Bank Status", color=0x866f0f)
-      embed.add_field(name="Money Amount", value="$ " + row[0])
+    msgPrefix = 'You just won '
+    
+  if wonMoney == '150000':
+    doubleWonMoney = random.choice(lotteryMoney)
+    if doubleWonMoney.startswith('-'):
+      msgPrefix2 = 'You just lost '
+    else:
+      msgPrefix2 = 'You just won '
+        
+    asyncio.get_event_loop().run_until_complete(insertMoney(doubleWonMoney, str(ctx.message.author)))
       
-      await ctx.send(embed=embed)
+    await ctx.send(str(ctx.message.author.display_name) + ", " + msgPrefix2 + doubleWonMoney + " dollars. Check your bank status.")
       
-  conn.close()
+  else:
+    asyncio.get_event_loop().run_until_complete(insertMoney(wonMoney, str(ctx.message.author)))
+      
+    await ctx.send(str(ctx.message.author.display_name) + ", " + msgPrefix + wonMoney + " dollars. Check your bank status.")
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
