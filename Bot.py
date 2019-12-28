@@ -55,11 +55,17 @@ async def urbangen(ctx, term):
     pass
   
 async def insertMoney(wonMoney, user):
+  dbServer = 'remotemysql.com'
+  dbUser = 'MPbzulZgmy'
+  dbPass = os.environ['db_password']
+  dbName = 'MPbzulZgmy'
+  
   conn = pymysql.connect(host=dbServer, user=dbUser, passwd=dbPass, db=dbName)
   cur = conn.cursor()
   sql = "SELECT money FROM users WHERE username ='%s'"
   cur.execute(sql % user)
   row_count = cur.rowcount
+  
   if row_count == 0:
     try:
       sql2 = "INSERT INTO users (username, money) VALUES (%s, %s)"
@@ -73,7 +79,6 @@ async def insertMoney(wonMoney, user):
       user_money = row[0]
       newMoney = int(user_money) + int(wonMoney)
     try:
-      
       sql2 = "UPDATE users SET money=%s WHERE username=%s"
       args = (str(newMoney), user)
       cur.execute(sql2, args)
@@ -253,10 +258,6 @@ async def money(ctx):
   
 @client.command(pass_context=True)
 async def lottery(ctx):
-  dbServer = 'remotemysql.com'
-  dbUser = 'MPbzulZgmy'
-  dbPass = os.environ['db_password']
-  dbName = 'MPbzulZgmy'
   msgPrefix = ''
   msgPrefix2 = ''
   
