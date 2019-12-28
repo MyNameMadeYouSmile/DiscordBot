@@ -233,9 +233,10 @@ async def bank(ctx, usern):
   row_count = cur.rowcount
   if row_count == 0:
     try:
-      sql2 = "INSERT INTO users(username,money) VALUES(%s,%s)"
-      args = (usern, "0")
+      sql2 = "INSERT INTO users (username, money) VALUES (%s, %s)"
+      args = (usern, "1")
       cur.execute(sql2, args)
+      conn.commit()
     except Exception as e:
       print(e)
     embed=discord.Embed(title="Bank Status", color=0x866f0f)
