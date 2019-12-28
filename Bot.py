@@ -185,10 +185,14 @@ async def removebg(ctx, imgUrl):
       
 @client.command(pass_context=True)
 async def money(ctx):
-  dbServer = 'www.db4free.net'
-  dbUser = 'discordbot'
+  #dbServer = 'www.db4free.net'
+  #dbUser = 'discordbot'
+  #dbPass = os.environ['db_password']
+  #dbName = 'discord_bank'
+  dbServer = 'remotemysql.com'
+  dbUser = 'MPbzulZgmy'
   dbPass = os.environ['db_password']
-  dbName = 'discord_bank'
+  dbName = 'MPbzulZgmy'
   
   conn = pymysql.connect(host=dbServer, user=dbUser, passwd=dbPass, db=dbName)
   cur = conn.cursor()
