@@ -200,10 +200,12 @@ async def money(ctx):
   cur.execute(sql % str(ctx.message.author))
   row_count = cur.rowcount
   if row_count == 0:
-    sql2 = "INSERT INTO users(username,money) " \
-            "VALUES(%s,%s)"
-    args = (str(ctx.message.author), "0")
-    cur.execute(sql2, args)
+    try:
+      sql2 = "INSERT INTO users(username,money) VALUES(%s,%s)"
+      args = (str(ctx.message.author), "0")
+      cur.execute(sql2, args)
+    except Exception as e:
+      print(e)
     embed=discord.Embed(title=str(ctx.message.author.display_name) + "'s Bank Status", color=0x866f0f)
     embed.add_field(name="Money Amount", value="$ 0")
     
