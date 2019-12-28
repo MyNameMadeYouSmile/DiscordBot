@@ -77,7 +77,7 @@ async def insertMoney(wonMoney, user):
   else:
     for row in cur:
       user_money = row[0]
-      newMoney = int(user_money) + int(wonMoney)
+    newMoney = int(user_money) + int(wonMoney)
     try:
       sql2 = "UPDATE users SET money=%s WHERE username=%s"
       args = (str(newMoney), user)
@@ -277,12 +277,12 @@ async def lottery(ctx):
         
     asyncio.get_event_loop().run_until_complete(insertMoney(doubleWonMoney, str(ctx.message.author)))
       
-    await ctx.send(str(ctx.message.author.display_name) + ", " + msgPrefix2 + doubleWonMoney + " dollars. Check your bank status.")
+    await ctx.send(ctx.message.author.mention + " " + msgPrefix2 + doubleWonMoney + " dollars. Check your bank status.")
       
   else:
     asyncio.get_event_loop().run_until_complete(insertMoney(wonMoney, str(ctx.message.author)))
       
-    await ctx.send(str(ctx.message.author.display_name) + ", " + msgPrefix + wonMoney + " dollars. Check your bank status.")
+    await ctx.send(ctx.message.author.mention + " " + msgPrefix + wonMoney + " dollars. Check your bank status.")
   
 @client.command(pass_context=True, aliases=['randcol', 'rc'])
 async def randomcolor(ctx):
