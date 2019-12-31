@@ -227,21 +227,18 @@ async def removebg(ctx, imgUrl):
       
 @client.command(pass_context=True)
 async def resize(ctx, imgUrl, weighT, heighT):
-  urllib.request.urlretrieve(imgUrl, "new-resize-img.png")
+  try:
+    urllib.request.urlretrieve(imgUrl, "new-resize-img.png")
   
-  with open('new-resize-img.png', 'r+b') as f:
-    with Image.open(f) as image:
-      cover = resizeimage.resize_cover(image, [weighT, heighT])
-      cover.save('resized-image.png', image.format)
+    with open('new-resize-img.png', 'r+b') as f:
+      with Image.open(f) as image:
+        cover = resizeimage.resize_cover(image, [weighT, heighT])
+        cover.save('resized-image.png', image.format)
       
-  await ctx.send(file=discord.File('resized-image.png'))
+    await ctx.send(file=discord.File('resized-image.png'))
       
 @client.command(pass_context=True)
 async def money(ctx):
-  #dbServer = 'www.db4free.net'
-  #dbUser = 'discordbot'
-  #dbPass = os.environ['db_password']
-  #dbName = 'discord_bank'
   dbServer = 'remotemysql.com'
   dbUser = 'MPbzulZgmy'
   dbPass = os.environ['db_password']
