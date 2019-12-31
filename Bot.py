@@ -271,8 +271,8 @@ async def buy(ctx, ename, imgUrl):
         conn.commit()
         
         sql4 = "UPDATE users SET money=%s WHERE username=%s"
-        newMoney = int(row[0]) - 10000
-        args3 = (str(newMoney), user)
+        newMoney = int(row[0]) + int("-10000")
+        args3 = (str(newMoney), str(ctx.message.author))
         cur.execute(sql4, args3)
         conn.commit()
         
