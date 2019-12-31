@@ -238,6 +238,47 @@ async def resize(ctx, imgUrl, weighT, heighT):
     await ctx.send(file=discord.File('resized-image.png'))
   except Exception as e:
     print(e)
+    
+@client.command(pass_context=True)
+async def buy(ctx, ename, imgUrl):
+  dbServer = 'remotemysql.com'
+  dbUser = 'MPbzulZgmy'
+  dbPass = os.environ['db_password']
+  dbName = 'MPbzulZgmy'
+  
+  conn = pymysql.connect(host=dbServer, user=dbUser, passwd=dbPass, db=dbName)
+  cur = conn.cursor()
+  sql = "SELECT money FROM users WHERE username ='%s'"
+  cur.execute(sql % str(ctx.message.author))
+  row_count = cur.rowcount
+  if row_count == 0:
+    try:
+      sql2 = "INSERT INTO users (username, money) VALUES (%s, %s)"
+      args = (str(ctx.message.author), "0")
+      cur.execute(sql2, args)
+      conn.commit()
+    except Exception as e:
+      print(e)
+    await ctx.send("You don't have enough money to buy an emoji. You need 10 000 $ but you got 0 $")   
+  else:
+    for row in cur:
+      if int(row[0]) < 10000:
+        await ctx.send(ctx.message.author.mention + " I'm sorry, but you need 10000 $ to purchase a custom emoji. You currently have only {} $.".format(row[0]))
+      else:
+        sql3 = "INSERT INTO emojis (emoji_name, emoji_url, emoji_author) VALUES (%s, %s, %s)"
+        args2 = (ename, imgUrl, str(ctx.message.author))
+        cur.execute(sql3, args2)
+        conn.commit()
+        
+        sql4 = "UPDATE users SET money=%s WHERE username=%s"
+        newMoney = int(row[0]) - 10000
+        args3 = (str(newMoney), user)
+        cur.execute(sql4, args3)
+        conn.commit()
+        
+        await ctx.send(ctx.message.author.mention + " You successfully purchased new custom emoji '{}' for 10 000 $. Now you can use it :)".format(ename))
+        
+  conn.close()
 
 @client.command(pass_context=True)
 async def emoji(ctx):
