@@ -241,9 +241,9 @@ async def resize(ctx, imgUrl, weighT, heighT):
 
 @client.command(pass_context=True)
 async def emoji(ctx):
-  with open("new-removed-bg.png", "rb") as image:
-    await ctx.guild.create_custom_emoji(name="new-emoji", image=image)
-  await ctx.send(":new-emoji:")
+  with open("new-removed-bg.png", "rb") as imaged:
+    await ctx.guild.create_custom_emoji(name="new123", image=imaged.read())
+  await ctx.send(":new123:")
   #await ctx.send("<:gunny:660094807619796993>")
       
 @client.command(pass_context=True)
