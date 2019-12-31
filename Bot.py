@@ -238,6 +238,10 @@ async def resize(ctx, imgUrl, weighT, heighT):
     await ctx.send(file=discord.File('resized-image.png'))
   except Exception as e:
     print(e)
+
+@client.command(pass_context=True)
+async def emoji(ctx):
+  ctx.send(file=discord.File('new-removed-bg.png'), ' hello')
       
 @client.command(pass_context=True)
 async def money(ctx):
