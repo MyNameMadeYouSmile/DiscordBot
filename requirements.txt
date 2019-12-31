@@ -7,3 +7,4 @@ pyppeteer
 cleverbot-aio-free
 pillow
 pymysql
+python-resize-image
