@@ -241,7 +241,8 @@ async def resize(ctx, imgUrl, weighT, heighT):
 
 @client.command(pass_context=True)
 async def emoji(ctx):
-  ctx.send(file=discord.File('new-removed-bg.png') + ' hello')
+  myEmoji = client.get_emoji(661558443659755530)
+  ctx.send(myEmoji)
       
 @client.command(pass_context=True)
 async def money(ctx):
