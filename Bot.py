@@ -242,7 +242,7 @@ async def resize(ctx, imgUrl, weighT, heighT):
 @client.command(pass_context=True)
 async def emoji(ctx):
   myEmoji = client.get_emoji(661558443659755530)
-  ctx.send(myEmoji)
+  await ctx.send(myEmoji)
       
 @client.command(pass_context=True)
 async def money(ctx):
