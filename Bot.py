@@ -17,7 +17,9 @@ import mycleverbot
 from mycleverbot import CleverBot
 from calculator import Calc
 from PIL import ImageDraw
+from PIL import Image
 import pymysql
+from resizeimage import resizeimage
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -222,6 +224,17 @@ async def removebg(ctx, imgUrl):
       await ctx.send(file=discord.File('new-removed-bg.png'))
   else:
       print("Error:", response.status_code, response.text)
+      
+@client.command(pass_context=True)
+async def resize(ctx, imgUrl, weighT, heighT):
+  urllib.request.urlretrieve(imgUrl, "new-resize-img.png")
+  
+  with open('new-resize-img.png', 'r+b') as f:
+    with Image.open(f) as image:
+      cover = resizeimage.resize_cover(image, [weighT, heighT])
+      cover.save('resized-image.png', image.format)
+      
+  await ctx.send(file=discord.File('resized-image.png'))
       
 @client.command(pass_context=True)
 async def money(ctx):
