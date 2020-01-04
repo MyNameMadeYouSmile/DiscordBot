@@ -19,6 +19,7 @@ from calculator import Calc
 from PIL import ImageDraw
 from PIL import Image
 import pymysql
+from resizeimage import resizeimage
 
 Client = discord.Client()
 bot_prefix= "!"
