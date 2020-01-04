@@ -240,7 +240,7 @@ async def resize(ctx, imgUrl, Width, Height):
   new_size = im.resize((int(Width), int(Height)))
   new_size.save('new-resized-img.' + extensioN)
   
-  await ctx.send(file=discord.File('new-resized-img.' + extensioN)
+  await ctx.send(file=discord.File('new-resized-img.' + extensioN))
                  
   await ctx.send("There ya go!")
     
