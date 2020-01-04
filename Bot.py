@@ -234,7 +234,7 @@ async def resize(ctx, imgUrl, WIdth, HEight):
   
   img = Image.open(imagE)
   
-  await ctx.send(">> Changing size of your image from {} to {}, {}...".format(im.size, WIdth, HEight))
+  await ctx.send(">> Changing size of your image from {} to {}, {}...".format(str(im.size), WIdth, HEight))
   
   new_width = int(WIdth)
   new_height = int(HEight)
@@ -242,25 +242,6 @@ async def resize(ctx, imgUrl, WIdth, HEight):
   img.save('resized-image.' + extensioN)
   
   await ctx.send(file=discord.File('resized-image.' + extensioN))
-  
-@client.command(pass_context=True)
-async def resizes(ctx, imgUrl, Width, Height):
-  extensioN = imgUrl[-3:]
-  print(extensioN)
-  imagE = "new-resize-img." + extensioN
-  
-  urllib.request.urlretrieve(imgUrl, imagE)
-  
-  im = Image.open(imagE)
-  
-  await ctx.send(">> Changing size of your image from {} to {}, {}...".format(im.size, Width, Height))
-  
-  new_size = im.resize((int(Width), int(Height)))
-  new_size.save('new-resized-img.' + extensioN)
-  
-  await ctx.send(file=discord.File('new-resized-img.' + extensioN))
-                 
-  await ctx.send("There ya go!")
     
 @client.command(pass_context=True)
 async def buy(ctx, ename, imgUrl):
