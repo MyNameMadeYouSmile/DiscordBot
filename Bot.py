@@ -234,6 +234,8 @@ async def resize(ctx, imgUrl, WIdth, HEight):
   
   img = Image.open(imagE)
   
+  await ctx.send(">> Changing size of your image from {} to {}, {}...".format(im.size, WIdth, HEight))
+  
   new_width = int(WIdth)
   new_height = int(HEight)
   img = img.resize((new_width, new_height), Image.ANTIALIAS)
