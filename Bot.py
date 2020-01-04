@@ -19,7 +19,6 @@ from calculator import Calc
 from PIL import ImageDraw
 from PIL import Image
 import pymysql
-from resizeimage import resizeimage
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -33,7 +32,6 @@ reddit = praw.Reddit(client_id=os.environ['14_chars'], \
 
 cb = CleverBot()
 chatterbotter = False
-resizer = False
 
 magicResponses = ['As I see it, yes.', 'Ask again later.', 'Better not tell you now.', 'Cannot predict now.', 'Concentrate and ask again.',
                  'Don’t count on it.', 'It is certain.', 'It is decidedly so.', 'Most likely.', 'My reply is no.', 'My sources say no.',
@@ -227,8 +225,26 @@ async def removebg(ctx, imgUrl):
       print("Error:", response.status_code, response.text)
       
 @client.command(pass_context=True)
-async def resize(ctx, imgUrl, Width, Height):  
+async def resize(ctx, imgUrl, WIdth, HEight):
   extensioN = imgUrl[-3:]
+  print(extensioN)
+  imagE = "new-resize-img." + extensioN
+  
+  urllib.request.urlretrieve(imgUrl, imagE)
+  
+  img = Image.open(imagE)
+  
+  new_width = int(WIdth)
+  new_height = int(HEight)
+  img = img.resize((new_width, new_height), Image.ANTIALIAS)
+  img.save('resized-image.' + extensioN)
+  
+  await ctx.send(file=discord.File('resized-image.' + extensioN))
+  
+@client.command(pass_context=True)
+async def resizes(ctx, imgUrl, Width, Height):
+  extensioN = imgUrl[-3:]
+  print(extensioN)
   imagE = "new-resize-img." + extensioN
   
   urllib.request.urlretrieve(imgUrl, imagE)
