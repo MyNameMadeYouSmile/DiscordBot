@@ -230,12 +230,12 @@ async def removebg(ctx, imgUrl):
 async def resize(ctx, imgUrl, Width, Height):  
   extensioN = imgUrl[-3:]
   imagE = "new-resize-img." + extensioN
-  resizer = True
   
   urllib.request.urlretrieve(imgUrl, imagE)
+  
   im = Image.open(imagE)
   
-  await ctx.send(">> Changing size of your image from {} to {}, {}...".format(str(im.size), Width, Height))
+  await ctx.send(">> Changing size of your image from {} to {}, {}...".format(im.size, Width, Height))
   
   new_size = im.resize((int(Width), int(Height)))
   new_size.save('new-resized-img.' + extensioN)
@@ -470,6 +470,10 @@ async def searchgwa_error(error, ctx):
 @urban.error
 async def urban_error(error, ctx):
   return await error.send(error.message.author.mention + " Usage: !urban [term]")
+
+@resize.error
+async def resize_error(error, ctx):
+  return await error.send(error.message.author.mention + " Something went wrong.")
   
 @_8ball.error
 async def _8ball_error(error, ctx):
