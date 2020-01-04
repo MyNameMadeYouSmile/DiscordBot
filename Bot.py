@@ -33,6 +33,7 @@ reddit = praw.Reddit(client_id=os.environ['14_chars'], \
 
 cb = CleverBot()
 chatterbotter = False
+resizer = False
 
 magicResponses = ['As I see it, yes.', 'Ask again later.', 'Better not tell you now.', 'Cannot predict now.', 'Concentrate and ask again.',
                  'Don’t count on it.', 'It is certain.', 'It is decidedly so.', 'Most likely.', 'My reply is no.', 'My sources say no.',
@@ -226,15 +227,22 @@ async def removebg(ctx, imgUrl):
       print("Error:", response.status_code, response.text)
       
 @client.command(pass_context=True)
-async def resize(ctx, imgUrl, weighT, heighT):
-  urllib.request.urlretrieve(imgUrl, "new-resize-img.jpg")
+async def resize(ctx, imgUrl, Width, Height):  
+  extensioN = imgUrl[-3:]
+  imagE = "new-resize-img." + extensioN
+  resizer = True
   
-  with open('new-resize-img.jpg', 'rb') as f:
-    with Image.open(f) as image:
-      cover = resizeimage.resize_cover(image, [int(weighT), int(heighT)])
-      cover.save('resized-image.jpeg', image.format)
-      
-  await ctx.send(file=discord.File('resized-image.jpeg'))
+  urllib.request.urlretrieve(imgUrl, imagE)
+  im = Image.open(imagE)
+  
+  await ctx.send(">> Changing size of your image from {} to {}, {}...".format(str(im.size), Width, Height))
+  
+  new_size = im.resize((int(Width), int(Height)))
+  new_size.save('new-resized-img.' + extensioN)
+  
+  await ctx.send(file=discord.File('new-resized-img.' + extensioN)
+                 
+  await ctx.send("There ya go!")
     
 @client.command(pass_context=True)
 async def buy(ctx, ename, imgUrl):
