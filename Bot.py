@@ -19,7 +19,6 @@ from calculator import Calc
 from PIL import ImageDraw
 from PIL import Image
 import pymysql
-from resizeimage import resizeimage
 
 Client = discord.Client()
 bot_prefix= "!"
@@ -227,17 +226,14 @@ async def removebg(ctx, imgUrl):
       
 @client.command(pass_context=True)
 async def resize(ctx, imgUrl, weighT, heighT):
-  try:
-    urllib.request.urlretrieve(imgUrl, "new-resize-img.png")
+  urllib.request.urlretrieve(imgUrl, "new-resize-img.jpg")
   
-    with open('new-resize-img.png', 'r+b') as f:
-      with Image.open(f) as image:
-        cover = resizeimage.resize_cover(image, [weighT, heighT])
-        cover.save('resized-image.png', image.format)
+  with open('new-resize-img.jpg', 'rb') as f:
+    with Image.open(f) as image:
+      cover = resizeimage.resize_cover(image, [int(weighT), int(heighT)])
+      cover.save('resized-image.jpeg', image.format)
       
-    await ctx.send(file=discord.File('resized-image.png'))
-  except Exception as e:
-    print(e)
+  await ctx.send(file=discord.File('resized-image.jpeg'))
     
 @client.command(pass_context=True)
 async def buy(ctx, ename, imgUrl):
